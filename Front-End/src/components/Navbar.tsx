@@ -33,25 +33,25 @@ const Navbar: React.FC = () => {
         <div className="hidden md:flex items-center gap-8">
           <Link
             to="/"
-            className="text-[16px] font-medium text-text dark:text-white hover:text-primary transition-colors"
+            className="text-[16px] font-medium text-text dark:text-white hover:text-primary hover:dark:text-secondary transition-colors"
           >
             Home
           </Link>
           <Link
             to="/produtos"
-            className="text-[16px] font-medium text-text dark:text-white hover:text-primary transition-colors"
+            className="text-[16px] font-medium text-text dark:text-white hover:text-primary hover:dark:text-secondary transition-colors"
           >
             Produtos
           </Link>
           <Link
             to="/categorias"
-            className="text-[16px] font-medium text-text dark:text-white hover:text-primary transition-colors"
+            className="text-[16px] font-medium text-text dark:text-white hover:text-primary hover:dark:text-secondary transition-colors"
           >
             Categorias
           </Link>
           <Link
             to="/contato"
-            className="text-[16px] font-medium text-text dark:text-white hover:text-primary transition-colors"
+            className="text-[16px] font-medium text-text dark:text-white hover:text-primary hover:dark:text-secondary transition-colors"
           >
             Contato
           </Link>
@@ -72,13 +72,13 @@ const Navbar: React.FC = () => {
           <ThemeToggle />
           <Link
             to="/favoritos"
-            className="text-muted-foreground hover:text-primary dark:text-muted-foreground dark:hover:text-primary transition"
+            className="text-muted-foreground hover:text-secondary dark:text-muted-foreground dark:hover:text-secondary-dark transition dark:text-text-dark"
           >
             <Heart className="w-6 h-6" />
           </Link>
           <Link
             to="/carrinho"
-            className="text-muted-foreground hover:text-primary dark:text-muted-foreground dark:hover:text-primary transition relative"
+            className="text-muted-foreground hover:text-secondary dark:text-muted-foreground dark:hover:text-secondary-dark transition relative dark:text-text-dark"
           >
             <ShoppingCart className="w-6 h-6" />
             <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full px-1.5">
@@ -87,7 +87,7 @@ const Navbar: React.FC = () => {
           </Link>
           <Link
             to="/perfil"
-            className="text-muted-foreground hover:text-primary dark:text-muted-foreground dark:hover:text-primary transition"
+            className="text-muted-foreground hover:text-secondary dark:text-muted-foreground dark:hover:text-secondary-dark transition dark:text-text-dark"
           >
             <User className="w-6 h-6" />
           </Link>

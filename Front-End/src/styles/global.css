@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #F3EDE4;
-  --color-primary: #6F4E37;
-  --color-secondary: #A0522D;
-  --color-detail: #D2691E;
-  --color-text: #2B1B12;
+  --color-background: #ffffff;
+  --color-primary: #121212;
+  --color-secondary: #f0f0f0;
+  --color-detail: #c0c0c0;
+  --color-text: #212121;
 
---color-background-dark: #1A0B0E;   /* vinho quase preto */
---color-primary-dark:    #301520;   /* vinho profundo */
---color-secondary-dark:  #4A1F2E;   /* bordô */
---color-detail-dark:     #E63946;   /* vermelho vibrante */
---color-text-dark:       #FADADD;   /* rosa claro suave */
+  --color-background-dark: #121212;
+  --color-primary-dark: #f0f0f0;
+  --color-secondary-dark: #2c2c2c;
+  --color-detail-dark: #4a4a4a;
+  --color-text-dark: #ffffff;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -22,5 +22,4 @@
     @apply bg-background dark:bg-background-dark transition-colors duration-500;
     font-family: 'Inter', sans-serif;
   }
-
 }
