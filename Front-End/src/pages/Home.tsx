@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import type { FC } from "react";
+import { motion } from "framer-motion";
 
 type Product = {
   id: string;
@@ -48,9 +49,30 @@ const Home: FC = () => {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 dark:bg-[#0a0a0b] text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <main className="relative min-h-screen bg-gray-50 dark:bg-[#0a0a0b] text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-hidden">
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <motion.div
+          className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-primary/20 to-purple-500/20 blur-3xl"
+          animate={{ y: [0, 40, 0], x: [0, 30, 0] }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-0 right-1/3 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-blue-400/10 to-primary/20 blur-3xl"
+          animate={{ y: [0, -30, 0], x: [0, -20, 0] }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      </div>
+
       {/* HERO */}
-      <section className="container mx-auto px-6 lg:px-8 pt-12 pb-16">
+      <section className="container mx-auto px-6 lg:px-8 pt-16 pb-20 relative">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* TEXTO */}
           <div className="lg:col-span-6">
@@ -60,13 +82,12 @@ const Home: FC = () => {
 
             <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight">
               Encontre peças que{" "}
-              <span className="text-primary">combinam</span> com seu estilo
+              <span className="text-detail">combinam</span> com seu estilo
             </h1>
 
             <p className="mt-4 text-gray-600 dark:text-gray-300 max-w-xl leading-relaxed">
-              Navegue por nossa seleção curada de roupas e acessórios de alta
-              qualidade — design contemporâneo, acabamento refinado e entrega
-              rápida.
+              Explore nossa nova coleção com o equilíbrio perfeito entre conforto
+              e design moderno. Feito para quem busca estilo e qualidade.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3 items-center">
@@ -86,18 +107,16 @@ const Home: FC = () => {
             </div>
 
             <div className="mt-10 flex flex-wrap gap-8">
-              {[
-                ["200+", "Marcas"],
-                ["2.000+", "Produtos"],
-                ["30.000+", "Clientes satisfeitos"],
-              ].map(([num, label]) => (
-                <div key={num} className="flex flex-col">
-                  <span className="text-3xl font-bold">{num}</span>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {label}
-                  </span>
-                </div>
-              ))}
+              {[["200+", "Marcas"], ["2.000+", "Produtos"], ["30.000+", "Clientes"]].map(
+                ([num, label]) => (
+                  <div key={num} className="flex flex-col">
+                    <span className="text-3xl font-bold">{num}</span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      {label}
+                    </span>
+                  </div>
+                )
+              )}
             </div>
           </div>
 
@@ -109,14 +128,13 @@ const Home: FC = () => {
                 alt="Hero"
                 className="w-full h-full object-cover rounded-lg scale-105 hover:scale-110 transition-transform duration-700"
               />
-              <div className="absolute -bottom-6 -right-6 w-44 h-44 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
             </div>
           </div>
         </div>
       </section>
 
       {/* PRODUTOS EM DESTAQUE */}
-      <section className="container mx-auto px-6 lg:px-8 mt-10 pb-20">
+      <section className="container mx-auto px-6 lg:px-8 mt-10 pb-20 relative">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-semibold tracking-tight">Destaques</h2>
           <Link
@@ -129,9 +147,11 @@ const Home: FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {featuredProducts.map((p) => (
-            <article
+            <motion.article
               key={p.id}
               className="group bg-white dark:bg-[#101112] rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-800"
+              whileHover={{ y: -6 }}
+              transition={{ duration: 0.3 }}
             >
               <div className="relative overflow-hidden">
                 <img
@@ -171,7 +191,7 @@ const Home: FC = () => {
                   </Link>
                 </div>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
       </section>
