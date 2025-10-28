@@ -38,7 +38,7 @@ const Navbar: React.FC = () => {
             Home
           </Link>
           <Link
-            to="/produts"
+            to="/products"
             className="text-[16px] font-medium text-text dark:text-white hover:text-primary hover:dark:text-secondary transition-colors"
           >
             Produtos

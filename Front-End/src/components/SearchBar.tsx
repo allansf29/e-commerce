@@ -1,4 +1,3 @@
-// src/components/SearchBar.tsx
 export default function SearchBar() {
   return (
     <div className="flex gap-2 border rounded-xl px-3 py-2 bg-white dark:bg-neutral-900">

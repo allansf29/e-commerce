@@ -9,7 +9,6 @@ export default function Products() {
       <div>
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold tracking-tight">PRODUCTS</h1>
-          <SearchBar />
         </div>
         <ProductGrid />
       </div>
