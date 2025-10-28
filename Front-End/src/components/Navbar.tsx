@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
             Categorias
           </Link>
           <Link
-            to="/contato"
+            to="/contact"
             className="text-[16px] font-medium text-text dark:text-white hover:text-primary hover:dark:text-secondary transition-colors"
           >
             Contato
