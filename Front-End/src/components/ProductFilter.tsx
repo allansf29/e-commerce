@@ -33,7 +33,7 @@ export default function ProductFilter() {
       <div className="mb-6">
         <button
           onClick={() => toggleSection("size")}
-          className="flex w-full justify-between items-center mb-2"
+          className="flex w-full justify-between items-center mb-2 cursor-pointer hover:text-indigo-500 transition"
         >
           <span className="font-medium text-sm text-gray-700 dark:text-gray-300">
             Size
@@ -52,7 +52,8 @@ export default function ProductFilter() {
               {["XS", "S", "M", "L", "XL", "2X"].map((size) => (
                 <button
                   key={size}
-                  className="border border-gray-300 dark:border-neutral-700 rounded-md px-3 py-1 text-sm font-medium hover:bg-gray-100 dark:hover:bg-neutral-800 transition"
+                  className="border border-gray-300 dark:border-neutral-700 rounded-md px-3 py-1 text-sm font-medium 
+                             hover:bg-gray-100 dark:hover:bg-neutral-800 cursor-pointer transition"
                 >
                   {size}
                 </button>
@@ -66,7 +67,7 @@ export default function ProductFilter() {
       <div className="mb-6">
         <button
           onClick={() => toggleSection("availability")}
-          className="flex w-full justify-between items-center mb-2"
+          className="flex w-full justify-between items-center mb-2 cursor-pointer hover:text-indigo-500 transition"
         >
           <span className="font-medium text-sm text-gray-700 dark:text-gray-300">
             Availability
@@ -82,12 +83,12 @@ export default function ProductFilter() {
               exit="exit"
               className="flex flex-col gap-2"
             >
-              <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
-                <input type="checkbox" className="accent-black dark:accent-white" />
+              <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-indigo-500 transition">
+                <input type="checkbox" className="accent-indigo-600 cursor-pointer" />
                 Availability <span className="text-gray-400">(450)</span>
               </label>
-              <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
-                <input type="checkbox" className="accent-black dark:accent-white" />
+              <label className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-indigo-500 transition">
+                <input type="checkbox" className="accent-indigo-600 cursor-pointer" />
                 Out of Stock <span className="text-gray-400">(18)</span>
               </label>
             </motion.div>
@@ -102,8 +103,11 @@ export default function ProductFilter() {
         onToggle={() => toggleSection("category")}
       >
         {["T-Shirts", "Pants", "Hoodies", "Shoes", "Accessories"].map((item) => (
-          <label key={item} className="flex items-center gap-2 text-sm">
-            <input type="checkbox" className="accent-black dark:accent-white" />
+          <label
+            key={item}
+            className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-indigo-500 transition"
+          >
+            <input type="checkbox" className="accent-indigo-600 cursor-pointer" />
             {item}
           </label>
         ))}
@@ -119,7 +123,7 @@ export default function ProductFilter() {
           {["#000000", "#ffffff", "#f87171", "#60a5fa", "#34d399", "#facc15"].map((color) => (
             <div
               key={color}
-              className="w-6 h-6 rounded-full border border-gray-300 dark:border-neutral-700"
+              className="w-6 h-6 rounded-full border border-gray-300 dark:border-neutral-700 cursor-pointer hover:scale-110 transition-transform"
               style={{ backgroundColor: color }}
             ></div>
           ))}
@@ -136,7 +140,7 @@ export default function ProductFilter() {
           type="range"
           min={0}
           max={1000}
-          className="w-full accent-black dark:accent-white"
+          className="w-full accent-indigo-600 cursor-pointer"
         />
         <div className="flex justify-between text-xs text-gray-500">
           <span>$0</span>
@@ -151,8 +155,11 @@ export default function ProductFilter() {
         onToggle={() => toggleSection("collections")}
       >
         {["Summer", "Winter", "Essentials", "Limited Edition"].map((item) => (
-          <label key={item} className="flex items-center gap-2 text-sm">
-            <input type="checkbox" className="accent-black dark:accent-white" />
+          <label
+            key={item}
+            className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-indigo-500 transition"
+          >
+            <input type="checkbox" className="accent-indigo-600 cursor-pointer" />
             {item}
           </label>
         ))}
@@ -168,7 +175,7 @@ export default function ProductFilter() {
           {["New", "Sale", "Hot", "Trending"].map((tag) => (
             <span
               key={tag}
-              className="px-2 py-1 text-xs border border-gray-300 dark:border-neutral-700 rounded-md"
+              className="px-2 py-1 text-xs border border-gray-300 dark:border-neutral-700 rounded-md cursor-pointer hover:bg-indigo-100 dark:hover:bg-indigo-800 hover:text-indigo-600 dark:hover:text-indigo-300 transition"
             >
               {tag}
             </span>
@@ -183,7 +190,10 @@ export default function ProductFilter() {
         onToggle={() => toggleSection("ratings")}
       >
         {[5, 4, 3, 2, 1].map((stars) => (
-          <div key={stars} className="flex items-center gap-1 text-sm">
+          <div
+            key={stars}
+            className="flex items-center gap-1 text-sm cursor-pointer hover:text-indigo-500 transition"
+          >
             {"★".repeat(stars)}{"☆".repeat(5 - stars)}
           </div>
         ))}
@@ -213,7 +223,7 @@ function FilterSection({
     <div className="mb-6">
       <button
         onClick={onToggle}
-        className="flex w-full justify-between items-center mb-2"
+        className="flex w-full justify-between items-center mb-2 cursor-pointer hover:text-indigo-500 transition"
       >
         <span className="font-medium text-sm text-gray-700 dark:text-gray-300">
           {title}

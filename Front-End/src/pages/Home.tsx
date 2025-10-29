@@ -1,14 +1,7 @@
 import { Link } from "react-router-dom";
 import type { FC } from "react";
 import { motion } from "framer-motion";
-
-type Product = {
-  id: string;
-  title: string;
-  price: string;
-  image: string;
-  badge?: string;
-};
+import type { Product } from "../types/type";
 
 const featuredProducts: Product[] = [
   {
@@ -138,7 +131,7 @@ const Home: FC = () => {
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-semibold tracking-tight">Destaques</h2>
           <Link
-            to="/produtos"
+            to="/products"
             className="text-sm text-gray-600 dark:text-gray-300 hover:text-primary transition"
           >
             Ver todos
