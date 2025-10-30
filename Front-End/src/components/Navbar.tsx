@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
             transition={{ duration: 0.6 }}
           />
           <span className="text-2xl font-bold text-primary dark:text-white tracking-tight">
-            Ecom<span className="text-text dark:text-muted-foreground">Store</span>
+            Ecom<span className="text-text dark:text-detail-dark">Store</span>
           </span>
         </Link>
 
@@ -42,12 +42,6 @@ const Navbar: React.FC = () => {
             className="text-[16px] font-medium text-text dark:text-white hover:text-primary hover:dark:text-secondary transition-colors"
           >
             Produtos
-          </Link>
-          <Link
-            to="/categorias"
-            className="text-[16px] font-medium text-text dark:text-white hover:text-primary hover:dark:text-secondary transition-colors"
-          >
-            Categorias
           </Link>
           <Link
             to="/contact"
@@ -69,7 +63,7 @@ const Navbar: React.FC = () => {
 
         {/* Ações */}
         <div className="flex items-center gap-4">
-          <ThemeToggle />
+          
           <Link
             to="/favoritos"
             className="text-muted-foreground hover:text-secondary dark:text-muted-foreground dark:hover:text-secondary-dark transition dark:text-text-dark"
@@ -91,6 +85,7 @@ const Navbar: React.FC = () => {
           >
             <User className="w-6 h-6" />
           </Link>
+          <ThemeToggle />
 
           {/* Menu Mobile */}
           <button

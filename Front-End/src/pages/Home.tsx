@@ -132,7 +132,7 @@ const Home: FC = () => {
           <h2 className="text-2xl font-semibold tracking-tight">Destaques</h2>
           <Link
             to="/products"
-            className="text-sm text-gray-600 dark:text-gray-300 hover:text-primary transition"
+            className="text-sm text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-secondary transition"
           >
             Ver todos
           </Link>
@@ -164,14 +164,14 @@ const Home: FC = () => {
                 <h3 className="text-base font-medium line-clamp-1">
                   {p.title}
                 </h3>
-                <p className="mt-2 text-lg font-semibold text-primary">
+                <p className="mt-2 text-lg font-semibold text-primary dark:text-text-dark">
                   {p.price}
                 </p>
 
                 <div className="mt-5 flex items-center gap-3">
                   <button
                     onClick={() => handleAddToCart(p)}
-                    className="flex-1 inline-flex items-center justify-center rounded-md px-3 py-2 bg-primary text-white font-medium hover:brightness-95 hover:shadow-md transition"
+                    className="flex-1 inline-flex items-center justify-center rounded-md px-3 py-2 bg-primary dark:bg-secondary-dark text-white font-medium hover:brightness-95 hover:shadow-md transition cursor-pointer"
                   >
                     Adicionar
                   </button>

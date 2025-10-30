@@ -1,75 +1,75 @@
-import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { FiMoon, FiSun } from "react-icons/fi";
 
-type ToggleOptionsType = "light" | "dark";
-
-const TOGGLE_CLASSES =
-  "text-sm font-medium flex items-center gap-2 px-3 py-1.5 transition-colors relative z-10";
+type Theme = "light" | "dark";
 
 const ThemeToggle = () => {
-  const [selected, setSelected] = useState<ToggleOptionsType | null>(null);
+  const [theme, setTheme] = useState<Theme>("dark");
 
-  // Carrega o tema salvo no localStorage OU define dark como padrão
+  // 🔹 Carrega tema salvo ou define dark como padrão
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as ToggleOptionsType | null;
-    const initialTheme = savedTheme || "dark"; // se não tiver nada, começa no dark
-    setSelected(initialTheme);
-    document.documentElement.classList.add(initialTheme);
+    const savedTheme = localStorage.getItem("theme") as Theme | null;
+    const initial = savedTheme || "dark";
+    setTheme(initial);
+    document.documentElement.classList.add(initial);
   }, []);
 
-  // Atualiza o tema quando `selected` mudar
+  // 🔹 Atualiza tema quando muda
   useEffect(() => {
-    if (!selected) return; // se ainda não foi definido, não faz nada
+    document.documentElement.classList.remove("light", "dark");
+    document.documentElement.classList.add(theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
-    const root = document.documentElement;
-    root.classList.remove("light", "dark");
-    root.classList.add(selected);
-
-    // Salva no localStorage
-    localStorage.setItem("theme", selected);
-  }, [selected]);
+  // 🔹 Alternar entre light/dark
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  };
 
   return (
-    <div className="relative flex items-center rounded-full border border-primary dark:border-secondary-dark transition-colors duration-500">
-      {/* Light */}
-      <button
-        className={`${TOGGLE_CLASSES} ${selected === "light"
-            ? "text-yellow-500"
-            : "text-gray-700 dark:text-gray-300 cursor-pointer"
-          }`}
-        onClick={() => setSelected("light")}
-      >
-        <FiSun className="text-lg" />
-      </button>
-
-      {/* Dark */}
-      <button
-        className={`${TOGGLE_CLASSES} ${selected === "dark"
-            ? "text-purple-500"
-            : "text-gray-700 dark:text-gray-300 cursor-pointer"
-          }`}
-        onClick={() => setSelected("dark")}
-      >
-        <FiMoon className="text-lg" />
-      </button>
-
-      {/* Background animado */}
-      {selected && (
-        <div
-          className={`absolute inset-0 z-0 flex ${selected === "dark" ? "justify-end" : "justify-start"
-            }`}
-        >
-          <motion.span
-            initial={{ x: selected === "dark" ? "100%" : "0%" }}
-            animate={{ x: selected === "dark" ? "100%" : "0%" }}
-            transition={{ type: "tween", duration: 0.3 }}
-            className="absolute top-0 left-0 h-full w-1/2 rounded-full bg-gradient-to-r from-stone-700 to-stone-500"
-          />
-
-        </div>
-      )}
-    </div>
+    <motion.button
+      onClick={toggleTheme}
+      whileTap={{ scale: 0.9 }}
+      whileHover={{
+        scale: 1.1,
+        boxShadow:
+          theme === "dark"
+            ? "0 0 12px 3px rgba(168, 85, 247, 0.6)"
+            : "0 0 12px 3px rgba(250, 204, 21, 0.6)",
+      }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="relative flex items-center justify-center w-10 h-10 rounded-full 
+                 bg-gradient-to-br from-zinc-200 to-zinc-300 
+                 dark:from-zinc-800 dark:to-zinc-900 
+                 shadow-md transition-all duration-300 cursor-pointer"
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        {theme === "dark" ? (
+          <motion.div
+            key="moon"
+            initial={{ opacity: 0, rotate: -90 }}
+            animate={{ opacity: 1, rotate: 0 }}
+            exit={{ opacity: 0, rotate: 90 }}
+            transition={{ duration: 0.3 }}
+            className="text-purple-400 text-xl"
+          >
+            <FiMoon />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="sun"
+            initial={{ opacity: 0, rotate: 90 }}
+            animate={{ opacity: 1, rotate: 0 }}
+            exit={{ opacity: 0, rotate: -90 }}
+            transition={{ duration: 0.3 }}
+            className="text-yellow-400 text-xl"
+          >
+            <FiSun />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.button>
   );
 };
 
