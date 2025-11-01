@@ -47,7 +47,7 @@ export default function ProductFilter() {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="flex flex-wrap gap-2"
+              className="flex flex-wrap gap-2 dark:text-text-dark"
             >
               {["XS", "S", "M", "L", "XL", "2X"].map((size) => (
                 <button
@@ -171,7 +171,7 @@ export default function ProductFilter() {
         isOpen={openSections.tags}
         onToggle={() => toggleSection("tags")}
       >
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 dark:text-text-dark">
           {["New", "Sale", "Hot", "Trending"].map((tag) => (
             <span
               key={tag}
@@ -192,7 +192,7 @@ export default function ProductFilter() {
         {[5, 4, 3, 2, 1].map((stars) => (
           <div
             key={stars}
-            className="flex items-center gap-1 text-sm cursor-pointer hover:text-indigo-500 transition"
+            className="flex items-center gap-1 text-sm cursor-pointer hover:text-indigo-500 transition dark:text-text-dark"
           >
             {"★".repeat(stars)}{"☆".repeat(5 - stars)}
           </div>

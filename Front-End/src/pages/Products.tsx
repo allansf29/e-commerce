@@ -8,7 +8,7 @@ export default function Products() {
       <ProductFilter />
       <div>
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold tracking-tight">PRODUCTS</h1>
+          <h1 className="text-2xl font-bold tracking-tight dark:text-text-dark">PRODUCTS</h1>
         </div>
         <ProductGrid />
       </div>

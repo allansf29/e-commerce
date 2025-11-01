@@ -69,7 +69,7 @@ const Home: FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* TEXTO */}
           <div className="lg:col-span-6">
-            <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-4">
+            <span className="inline-block px-3 py-1 rounded-full bg-primary/10 dark:bg-gray-900 text-primary dark:text-text-dark font-semibold text-sm mb-4">
               Coleção 2025
             </span>
 
@@ -93,7 +93,7 @@ const Home: FC = () => {
 
               <Link
                 to="/ofertas"
-                className="text-sm text-gray-700 dark:text-gray-300 hover:text-primary hover:underline transition-colors"
+                className="text-sm text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-secondary hover:underline transition-colors"
               >
                 Ver promoções
               </Link>
