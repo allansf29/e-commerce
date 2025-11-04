@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+
+
 @theme {
   --color-background: #ffffff;
   --color-primary: #121212;
@@ -23,4 +28,28 @@
     @apply bg-background dark:bg-background-dark transition-colors duration-500;
     font-family: 'Inter', sans-serif;
   }
+}
+
+.swiper-pagination-bullet {
+  background-color: #aaa !important;
+  opacity: 0.7 !important;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--color-primary, #6366f1) !important;
+  width: 16px !important;
+  border-radius: 8px !important;
+  opacity: 1 !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--color-primary, #6366f1) !important;
+  transition: opacity 0.2s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  opacity: 0.7;
 }
