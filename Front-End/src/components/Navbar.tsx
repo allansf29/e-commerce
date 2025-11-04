@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
           />
-          <span className="text-2xl font-bold text-primary dark:text-white tracking-tight">
+          <span className="text-2xl font-bold text-primary dark:text-white tracking-tight hidden sm:block">
             Ecom<span className="text-text dark:text-detail-dark">Store</span>
           </span>
         </Link>
@@ -135,10 +135,10 @@ const Navbar: React.FC = () => {
             Contato
           </Link>
 
-          <div className="border-t border-border pt-3 flex items-center justify-between">
+          {/* <div className="border-t border-border pt-3 flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Tema:</span>
             <ThemeToggle />
-          </div>
+          </div> */}
         </motion.div>
       )}
     </header>
