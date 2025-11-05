@@ -154,7 +154,7 @@ const Home: FC = () => {
                     </button>
 
                     <Link
-                      to={`/produto/${p.id}`}
+                      to={`/product/${p.id}`}
                       className="inline-flex items-center justify-center px-3 py-2 rounded-md border border-gray-300 dark:border-gray-700 text-sm text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#151617] transition"
                     >
                       Ver

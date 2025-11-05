@@ -1,30 +1,42 @@
 export const products = [
   {
-    id: 1,
-    name: "Basic Slim Fit T-Shirt",
-    category: "Cotton T Shirt",
-    price: 199,
-    image: "https://images.unsplash.com/photo-1760433674215-0880d052099a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+    id: "p1",
+    name: "Jaqueta Urbana Masculina",
+    category: "Moda Masculina",
+    price: 249.9,
+    image:
+      "https://images.unsplash.com/photo-1745196587689-226859e4b32a?auto=format&fit=crop&q=80&w=688",
+    description:
+      "Jaqueta com corte urbano e tecido premium, ideal para o dia a dia com estilo e conforto.",
   },
   {
-    id: 2,
-    name: "Basic Heavy Weight T-Shirt",
-    category: "Crewneck T-Shirt",
-    price: 199,
-    image: "https://images.unsplash.com/photo-1753395035012-0fbc6746215d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+    id: "p2",
+    name: "Tênis Performance",
+    category: "Calçados",
+    price: 399.0,
+    image:
+      "https://images.unsplash.com/photo-1760164141999-d000613107ba?auto=format&fit=crop&q=80&w=735",
+    description:
+      "Tênis leve e confortável, perfeito para treinos e corridas urbanas, com amortecimento avançado.",
   },
   {
-    id: 3,
-    name: "Full Sleeve Zipper",
-    category: "Cotton T Shirt",
-    price: 199,
-    image: "https://images.unsplash.com/photo-1756303472499-743192907645?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1887",
+    id: "p3",
+    name: "Moletom Confort Fit",
+    category: "Casual Wear",
+    price: 179.9,
+    image:
+      "https://images.unsplash.com/photo-1760126130338-4e6c9043ee2d?auto=format&fit=crop&q=80&w=764",
+    description:
+      "Moletom feito com algodão macio e modelagem solta, ideal para os dias frios com conforto.",
   },
   {
-    id: 3,
-    name: "Full Sleeve Zipper",
-    category: "Cotton T Shirt",
-    price: 199,
-    image: "https://images.unsplash.com/photo-1737994872485-653909264472?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=697",
+    id: "p4",
+    name: "Óculos Minimal",
+    category: "Acessórios",
+    price: 129.0,
+    image:
+      "https://images.unsplash.com/photo-1760476426758-7be6980cdfe1?auto=format&fit=crop&q=80&w=1057",
+    description:
+      "Óculos de sol minimalista com design leve e moderno, ideal para o dia a dia.",
   },
-]
+];
