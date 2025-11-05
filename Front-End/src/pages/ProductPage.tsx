@@ -1,35 +1,48 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { products } from "../data/products";
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+
   const product = products.find((p) => p.id === id);
+
+  // Função de voltar com fallback (caso o histórico não exista)
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate("/"); // fallback pra home
+    }
+  };
 
   if (!product) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-zinc-600 dark:text-zinc-400">
         <p>Produto não encontrado 😢</p>
-        <Link
-          to="/"
+        <button
+          onClick={handleBack}
           className="mt-4 text-blue-500 hover:underline hover:brightness-110 transition"
         >
           Voltar
-        </Link>
+        </button>
       </div>
     );
   }
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      <Link
-        to="/"
+      {/* Botão Voltar */}
+      <button
+        onClick={handleBack}
         className="flex items-center gap-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 mb-6"
       >
         <ArrowLeft className="w-5 h-5" /> Voltar
-      </Link>
+      </button>
 
       <div className="grid md:grid-cols-2 gap-10">
+        {/* Imagem */}
         <div className="rounded-2xl overflow-hidden shadow-lg bg-gray-100 dark:bg-[#101112]">
           <img
             src={product.image}
@@ -38,25 +51,30 @@ const ProductPage = () => {
           />
         </div>
 
+        {/* Detalhes */}
         <div className="flex flex-col justify-center">
           <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-3">
             {product.name}
           </h1>
 
           <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
-            Categoria: <span className="text-gray-800 dark:text-gray-200">{product.category}</span>
+            Categoria:{" "}
+            <span className="text-gray-800 dark:text-gray-200">
+              {product.category}
+            </span>
           </p>
 
           <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-6">
-            {product.description || "Produto de alta qualidade feito com materiais selecionados."}
+            {product.description ||
+              "Produto de alta qualidade feito com materiais selecionados."}
           </p>
 
           <span className="text-3xl font-semibold text-green-600 mb-8">
-            R$ {product.price.toFixed(2)}
+            R$ {Number(product.price).toFixed(2)}
           </span>
 
           <div className="flex gap-3">
-            <button className="bg-primary text-white dark:bg-secondary-dark dark:text-zinc-900 px-6 py-3 rounded-xl hover:scale-105 transition-all font-medium shadow-md">
+            <button className="bg-indigo-600 text-white px-6 py-3 rounded-xl hover:scale-105 transition-all font-medium shadow-md">
               Adicionar ao Carrinho
             </button>
 

@@ -1,6 +1,5 @@
 import ProductFilter from "../components/ProductFilter"
 import ProductGrid from "../components/ProductGrid"
-import SearchBar from "../components/SearchBar"
 
 export default function Products() {
   return (
