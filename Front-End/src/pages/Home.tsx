@@ -116,7 +116,7 @@ const Home: FC = () => {
           autoplay={{ delay: 3500, disableOnInteraction: false }}
           className="pb-10"
         >
-          {featuredProducts.map((p) => (
+          {featuredProducts.slice(0, 6).map((p) => (
             <SwiperSlide key={p.id}>
               <motion.article
                 className="group bg-white dark:bg-[#101112] rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-800"
