@@ -8,7 +8,7 @@ import { featuredProducts } from "../data/featuredProducts";
 
 const Home: FC = () => {
   const handleAddToCart = (product: Product) => {
-    alert(`${product.title} adicionado ao carrinho — ${product.price}`);
+    alert(`${product.name} adicionado ao carrinho — ${product.price}`);
   };
 
   return (
@@ -126,7 +126,7 @@ const Home: FC = () => {
                 <div className="relative overflow-hidden">
                   <img
                     src={p.image}
-                    alt={p.title}
+                    alt={p.name}
                     className="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                   />
@@ -139,7 +139,7 @@ const Home: FC = () => {
 
                 <div className="p-5">
                   <h3 className="text-base font-medium line-clamp-1">
-                    {p.title}
+                    {p.name}
                   </h3>
                   <p className="mt-2 text-lg font-semibold text-primary dark:text-text-dark">
                     {p.price}

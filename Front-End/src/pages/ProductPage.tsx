@@ -1,12 +1,12 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import { products } from "../data/products";
+import { featuredProducts } from "../data/featuredProducts";
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const product = products.find((p) => p.id === id);
+  const product = featuredProducts.find((p) => p.id === id);
 
   // Função de voltar com fallback (caso o histórico não exista)
   const handleBack = () => {
