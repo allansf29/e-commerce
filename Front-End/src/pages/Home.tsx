@@ -166,6 +166,96 @@ const Home: FC = () => {
           ))}
         </Swiper>
       </section>
+{/* BENEFÍCIOS */}
+<section className="bg-gray-100 dark:bg-[#0f0f10] py-20 relative overflow-hidden">
+  <motion.div
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    viewport={{ once: true }}
+    className="container mx-auto px-6 lg:px-8 text-center"
+  >
+    <h2 className="text-3xl font-bold mb-14 tracking-tight">
+      Por que comprar com a gente?
+    </h2>
+
+    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      {[
+        { icon: "🚚", title: "Frete Grátis", desc: "Para pedidos acima de R$199" },
+        { icon: "💳", title: "Pagamento Fácil", desc: "Em até 12x sem juros" },
+        { icon: "🔒", title: "Compra Segura", desc: "Protegemos seus dados com criptografia" },
+        { icon: "💬", title: "Suporte Rápido", desc: "Atendimento humanizado via chat" },
+      ].map((b, i) => (
+        <motion.div
+          key={b.title}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: i * 0.2 }}
+          viewport={{ once: true }}
+          className="flex flex-col items-center bg-white dark:bg-[#101112] py-10 px-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
+        >
+          <span className="text-5xl mb-4">{b.icon}</span>
+          <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
+            {b.title}
+          </h3>
+          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed max-w-[200px]">
+            {b.desc}
+          </p>
+        </motion.div>
+      ))}
+    </div>
+  </motion.div>
+
+  {/* EFEITO DE FUNDO SUTIL */}
+  <motion.div
+    className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/10 dark:bg-primary/5 blur-3xl rounded-full"
+    animate={{ opacity: [0.2, 0.4, 0.2], scale: [1, 1.1, 1] }}
+    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+  />
+</section>
+
+{/* DEPOIMENTOS */}
+<section className="container mx-auto px-6 lg:px-8 py-24 relative">
+  <motion.h2
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    viewport={{ once: true }}
+    className="text-3xl font-bold mb-14 text-center tracking-tight"
+  >
+    O que nossos clientes dizem
+  </motion.h2>
+
+  <div className="grid md:grid-cols-3 gap-10">
+    {[
+      { name: "Lucas M.", text: "Produtos incríveis e entrega super rápida!" },
+      { name: "Ana C.", text: "A qualidade é impecável, recomendo demais!" },
+      { name: "Rafa S.", text: "Atendimento excelente e site fácil de usar!" },
+    ].map((t, i) => (
+      <motion.div
+        key={t.name}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: i * 0.2 }}
+        viewport={{ once: true }}
+        className="relative bg-white dark:bg-[#101112] p-8 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300"
+      >
+        <span className="absolute -top-5 left-6 text-5xl text-primary opacity-30 select-none">
+          “
+        </span>
+        <p className="italic text-gray-600 dark:text-gray-300 mb-6 leading-relaxed relative z-10">
+          {t.text}
+        </p>
+        <div className="border-t border-gray-200 dark:border-gray-800 pt-3">
+          <span className="font-semibold text-primary dark:text-secondary">
+            {t.name}
+          </span>
+        </div>
+      </motion.div>
+    ))}
+  </div>
+</section>
+
     </main>
   );
 };
