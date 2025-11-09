@@ -114,21 +114,14 @@ const Navbar: React.FC = () => {
             Home
           </Link>
           <Link
-            to="/produtos"
+            to="/products"
             className="block text-base text-text dark:text-white hover:text-primary transition"
             onClick={() => setMenuOpen(false)}
           >
             Produtos
           </Link>
           <Link
-            to="/categorias"
-            className="block text-base text-text dark:text-white hover:text-primary transition"
-            onClick={() => setMenuOpen(false)}
-          >
-            Categorias
-          </Link>
-          <Link
-            to="/contato"
+            to="/contact"
             className="block text-base text-text dark:text-white hover:text-primary transition"
             onClick={() => setMenuOpen(false)}
           >

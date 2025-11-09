@@ -100,7 +100,7 @@ const Footer = () => {
             />
             <button
               type="submit"
-              className="px-4 py-2 rounded-lg bg-primary dark:bg-secondary text-white font-medium hover:brightness-95 transition"
+              className="px-4 py-2 rounded-lg bg-primary dark:bg-secondary text-white dark:text-detail-dark font-medium hover:brightness-95 transition cursor-pointer"
             >
               Enviar
             </button>
@@ -114,7 +114,7 @@ const Footer = () => {
                 href="#"
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-200 dark:bg-[#151617] hover:bg-primary hover:text-white dark:hover:bg-secondary transition"
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-200 dark:bg-[#151617] hover:bg-primary hover:text-white dark:hover:bg-secondary transition hover:dark:text-detail-dark"
               >
                 <Icon size={18} />
               </motion.a>

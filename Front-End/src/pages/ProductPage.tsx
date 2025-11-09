@@ -36,7 +36,7 @@ const ProductPage = () => {
       {/* Botão Voltar */}
       <button
         onClick={handleBack}
-        className="flex items-center gap-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 mb-6"
+        className="flex items-center gap-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 mb-6 cursor-pointer"
       >
         <ArrowLeft className="w-5 h-5" /> Voltar
       </button>
@@ -74,13 +74,13 @@ const ProductPage = () => {
           </span>
 
           <div className="flex gap-3">
-            <button className="bg-indigo-600 text-white px-6 py-3 rounded-xl hover:scale-105 transition-all font-medium shadow-md">
+            <button className="bg-indigo-600 text-white px-6 py-3 rounded-xl hover:scale-105 transition-all font-medium shadow-md cursor-pointer">
               Adicionar ao Carrinho
             </button>
 
             <Link
               to="/products"
-              className="border border-gray-300 dark:border-gray-700 text-sm px-6 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-[#151617] transition-all"
+              className="border border-gray-300 dark:border-gray-700 text-sm px-6 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-[#151617] transition-all dark:text-text-dark cursor-pointer flex items-center justify-center"
             >
               Ver mais produtos
             </Link>
