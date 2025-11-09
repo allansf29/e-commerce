@@ -1,6 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./routers";
 import Navbar from './components/Navbar'
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <main className="">
         <Navbar />
         <AppRoutes />
+        <Footer />
       </main>
     </BrowserRouter>
   );
