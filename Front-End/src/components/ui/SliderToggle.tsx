@@ -5,7 +5,13 @@ import { FiMoon, FiSun } from "react-icons/fi";
 type Theme = "light" | "dark";
 
 const ThemeToggle = () => {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>(() => {
+  if (typeof window !== "undefined") {
+    return (localStorage.getItem("theme") as Theme) || "light";
+  }
+  return "light";
+});
+
 
   // 🔹 Carrega tema salvo ou define dark como padrão
   useEffect(() => {

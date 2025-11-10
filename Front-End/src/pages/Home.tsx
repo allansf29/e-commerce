@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react"; // 🔹 ADICIONA ISSO AQUI
 import type { FC } from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -9,6 +10,38 @@ import { featuredProducts } from "../data/featuredProducts";
 const Home: FC = () => {
   const handleAddToCart = (product: Product) => {
     alert(`${product.name} adicionado ao carrinho — ${product.price}`);
+  };
+
+  // contador
+  const Counter = ({ target, label }: { target: number; label: string }) => {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+      let start = 0;
+      const end = target;
+      const duration = 1200;
+      const stepTime = Math.max(Math.floor(duration / end), 20);
+
+      const timer = setInterval(() => {
+        start += Math.ceil(end / (duration / stepTime));
+        if (start >= end) {
+          start = end;
+          clearInterval(timer);
+        }
+        setCount(start);
+      }, stepTime);
+
+      return () => clearInterval(timer);
+    }, [target]);
+
+    return (
+      <div className="flex flex-col">
+        <span className="text-3xl font-bold text-primary dark:text-white">
+          {count.toLocaleString("pt-BR")}+
+        </span>
+        <span className="text-sm text-gray-500 dark:text-gray-400">{label}</span>
+      </div>
+    );
   };
 
   return (
@@ -28,28 +61,62 @@ const Home: FC = () => {
       </div>
 
       {/* HERO */}
-      <section className="container mx-auto px-6 lg:px-8 pt-16 pb-20 relative">
+      <section className="container mx-auto px-6 lg:px-8 pt-16 pb-20 relative overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* TEXTO */}
-          <div className="lg:col-span-6">
-            <span className="inline-block px-3 py-1 rounded-full bg-primary/10 dark:bg-gray-900 text-primary dark:text-text-dark font-semibold text-sm mb-4">
+          <motion.div
+            className="lg:col-span-6"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <motion.span
+              className="inline-block px-3 py-1 rounded-full bg-primary/10 dark:bg-gray-900 text-primary dark:text-text-dark font-semibold text-sm mb-4"
+              initial={{ opacity: 0, y: -10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
               Coleção 2025
-            </span>
+            </motion.span>
 
-            <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight">
+            <motion.h1
+              className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+            >
               Encontre peças que{" "}
-              <span className="text-detail">combinam</span> com seu estilo
-            </h1>
+              <span className="text-detail relative">
+                combinam
+                <motion.span
+                  className="absolute left-0 bottom-0 w-full h-[6px] bg-primary/30 rounded-full"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  transition={{ delay: 0.6, duration: 0.7, ease: "easeOut" }}
+                />
+              </span>{" "}
+              com seu estilo
+            </motion.h1>
 
-            <p className="mt-4 text-gray-600 dark:text-gray-300 max-w-xl leading-relaxed">
+            <motion.p
+              className="mt-4 text-gray-600 dark:text-gray-300 max-w-xl leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+            >
               Explore nossa nova coleção com o equilíbrio perfeito entre conforto
               e design moderno. Feito para quem busca estilo e qualidade.
-            </p>
+            </motion.p>
 
-            <div className="mt-6 flex flex-wrap gap-3 items-center">
+            <motion.div
+              className="mt-6 flex flex-wrap gap-3 items-center"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+            >
               <Link
                 to="/produtos"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary text-white font-medium shadow-md hover:shadow-lg hover:brightness-95 transition-all"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary text-white font-medium shadow-md hover:shadow-lg hover:scale-[1.03] hover:brightness-95 transition-all duration-300"
               >
                 Comprar agora
               </Link>
@@ -60,34 +127,49 @@ const Home: FC = () => {
               >
                 Ver promoções
               </Link>
-            </div>
+            </motion.div>
 
-            <div className="mt-10 flex flex-wrap gap-8">
-              {[["200+", "Marcas"], ["2.000+", "Produtos"], ["30.000+", "Clientes"]].map(
-                ([num, label]) => (
-                  <div key={num} className="flex flex-col">
-                    <span className="text-3xl font-bold">{num}</span>
-                    <span className="text-sm text-gray-500 dark:text-gray-400">
-                      {label}
-                    </span>
-                  </div>
-                )
-              )}
-            </div>
-          </div>
+            <motion.div
+              className="mt-10 flex flex-wrap gap-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+            >
+              <Counter target={200} label="Marcas" />
+              <Counter target={2000} label="Produtos" />
+              <Counter target={30000} label="Clientes" />
+            </motion.div>
+          </motion.div>
 
           {/* IMAGEM HERO */}
-          <div className="lg:col-span-6 relative">
+          <motion.div
+            className="lg:col-span-6 relative"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <div className="aspect-[16/12] w-full rounded-xl overflow-hidden bg-gradient-to-br from-white to-gray-100 dark:from-[#101112] dark:to-[#0b0b0d] flex items-center justify-end shadow-lg">
-              <img
+              <motion.img
                 src="https://images.unsplash.com/photo-1760594386925-519fba2ad5ba?auto=format&fit=crop&q=80&w=687"
                 alt="Hero"
-                className="w-full h-full object-cover rounded-lg scale-105 hover:scale-110 transition-transform duration-700"
+                className="w-full h-full object-cover rounded-lg"
+                whileHover={{ scale: 1.08 }}
+                transition={{ type: 'spring', stiffness: 150, damping: 15 }}
               />
             </div>
-          </div>
+          </motion.div>
         </div>
+
+        {/* FUNDO ANIMADO SUTIL */}
+        <motion.div
+          className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-primary/5 to-transparent opacity-50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.5 }}
+          transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+        />
       </section>
+
 
       {/* CAROUSEL DESTACADO */}
       <section className="container mx-auto px-6 lg:px-8 mt-10 pb-20 relative">
@@ -166,95 +248,95 @@ const Home: FC = () => {
           ))}
         </Swiper>
       </section>
-{/* BENEFÍCIOS */}
-<section className="bg-gray-100 dark:bg-[#0f0f10] py-20 relative overflow-hidden">
-  <motion.div
-    initial={{ opacity: 0, y: 40 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }}
-    viewport={{ once: true }}
-    className="container mx-auto px-6 lg:px-8 text-center"
-  >
-    <h2 className="text-3xl font-bold mb-14 tracking-tight">
-      Por que comprar com a gente?
-    </h2>
-
-    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
-      {[
-        { icon: "🚚", title: "Frete Grátis", desc: "Para pedidos acima de R$199" },
-        { icon: "💳", title: "Pagamento Fácil", desc: "Em até 12x sem juros" },
-        { icon: "🔒", title: "Compra Segura", desc: "Protegemos seus dados com criptografia" },
-        { icon: "💬", title: "Suporte Rápido", desc: "Atendimento humanizado via chat" },
-      ].map((b, i) => (
+      {/* BENEFÍCIOS */}
+      <section className="bg-gray-100 dark:bg-[#0f0f10] py-20 relative overflow-hidden">
         <motion.div
-          key={b.title}
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: i * 0.2 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="flex flex-col items-center bg-white dark:bg-[#101112] py-10 px-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
+          className="container mx-auto px-6 lg:px-8 text-center"
         >
-          <span className="text-5xl mb-4">{b.icon}</span>
-          <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
-            {b.title}
-          </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed max-w-[200px]">
-            {b.desc}
-          </p>
+          <h2 className="text-3xl font-bold mb-14 tracking-tight">
+            Por que comprar com a gente?
+          </h2>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            {[
+              { icon: "🚚", title: "Frete Grátis", desc: "Para pedidos acima de R$199" },
+              { icon: "💳", title: "Pagamento Fácil", desc: "Em até 12x sem juros" },
+              { icon: "🔒", title: "Compra Segura", desc: "Protegemos seus dados com criptografia" },
+              { icon: "💬", title: "Suporte Rápido", desc: "Atendimento humanizado via chat" },
+            ].map((b, i) => (
+              <motion.div
+                key={b.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.2 }}
+                viewport={{ once: true }}
+                className="flex flex-col items-center bg-white dark:bg-[#101112] py-10 px-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
+              >
+                <span className="text-5xl mb-4">{b.icon}</span>
+                <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
+                  {b.title}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed max-w-[200px]">
+                  {b.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
-      ))}
-    </div>
-  </motion.div>
 
-  {/* EFEITO DE FUNDO SUTIL */}
-  <motion.div
-    className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/10 dark:bg-primary/5 blur-3xl rounded-full"
-    animate={{ opacity: [0.2, 0.4, 0.2], scale: [1, 1.1, 1] }}
-    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-  />
-</section>
+        {/* EFEITO DE FUNDO SUTIL */}
+        <motion.div
+          className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/10 dark:bg-primary/5 blur-3xl rounded-full"
+          animate={{ opacity: [0.2, 0.4, 0.2], scale: [1, 1.1, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </section>
 
-{/* DEPOIMENTOS */}
-<section className="container mx-auto px-6 lg:px-8 py-24 relative">
-  <motion.h2
-    initial={{ opacity: 0, y: 40 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }}
-    viewport={{ once: true }}
-    className="text-3xl font-bold mb-14 text-center tracking-tight"
-  >
-    O que nossos clientes dizem
-  </motion.h2>
+      {/* DEPOIMENTOS */}
+      <section className="container mx-auto px-6 lg:px-8 py-24 relative">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-3xl font-bold mb-14 text-center tracking-tight"
+        >
+          O que nossos clientes dizem
+        </motion.h2>
 
-  <div className="grid md:grid-cols-3 gap-10">
-    {[
-      { name: "Lucas M.", text: "Produtos incríveis e entrega super rápida!" },
-      { name: "Ana C.", text: "A qualidade é impecável, recomendo demais!" },
-      { name: "Rafa S.", text: "Atendimento excelente e site fácil de usar!" },
-    ].map((t, i) => (
-      <motion.div
-        key={t.name}
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: i * 0.2 }}
-        viewport={{ once: true }}
-        className="relative bg-white dark:bg-[#101112] p-8 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300"
-      >
-        <span className="absolute -top-5 left-6 text-5xl text-primary opacity-30 select-none">
-          “
-        </span>
-        <p className="italic text-gray-600 dark:text-gray-300 mb-6 leading-relaxed relative z-10">
-          {t.text}
-        </p>
-        <div className="border-t border-gray-200 dark:border-gray-800 pt-3">
-          <span className="font-semibold text-primary dark:text-secondary">
-            {t.name}
-          </span>
+        <div className="grid md:grid-cols-3 gap-10">
+          {[
+            { name: "Lucas M.", text: "Produtos incríveis e entrega super rápida!" },
+            { name: "Ana C.", text: "A qualidade é impecável, recomendo demais!" },
+            { name: "Rafa S.", text: "Atendimento excelente e site fácil de usar!" },
+          ].map((t, i) => (
+            <motion.div
+              key={t.name}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: i * 0.2 }}
+              viewport={{ once: true }}
+              className="relative bg-white dark:bg-[#101112] p-8 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300"
+            >
+              <span className="absolute -top-5 left-6 text-5xl text-primary opacity-30 select-none">
+                “
+              </span>
+              <p className="italic text-gray-600 dark:text-gray-300 mb-6 leading-relaxed relative z-10">
+                {t.text}
+              </p>
+              <div className="border-t border-gray-200 dark:border-gray-800 pt-3">
+                <span className="font-semibold text-primary dark:text-secondary">
+                  {t.name}
+                </span>
+              </div>
+            </motion.div>
+          ))}
         </div>
-      </motion.div>
-    ))}
-  </div>
-</section>
+      </section>
 
     </main>
   );
