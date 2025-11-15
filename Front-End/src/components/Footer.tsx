@@ -40,9 +40,8 @@ const Footer = () => {
           <ul className="space-y-2 text-sm">
             {[
               { name: "Início", to: "/" },
-              { name: "Produtos", to: "/produtos" },
-              { name: "Ofertas", to: "/ofertas" },
-              { name: "Contato", to: "/contato" },
+              { name: "Produtos", to: "/products" },
+              { name: "Contato", to: "/contact" },
             ].map((link) => (
               <li key={link.name}>
                 <Link

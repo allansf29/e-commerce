@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ShoppingCart, User, Search, Menu, X, Heart } from "lucide-react";
 import ThemeToggle from "../components/ui/SliderToggle";
-import Logo from "/vite.svg";
+import Logo from "../assets/shirt.svg";
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
