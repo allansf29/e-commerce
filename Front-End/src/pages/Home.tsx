@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react"; // 🔹 ADICIONA ISSO AQUI
+import { useEffect, useState } from "react";
 import type { FC } from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,24 +12,25 @@ const Home: FC = () => {
     alert(`${product.name} adicionado ao carrinho — ${product.price}`);
   };
 
-  // contador
+  // 🔥 Contador REAL OFICIAL — suave, preciso, nunca passa do target
   const Counter = ({ target, label }: { target: number; label: string }) => {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
       let start = 0;
       const end = target;
-      const duration = 1200;
-      const stepTime = Math.max(Math.floor(duration / end), 20);
+      const duration = 1300;
+
+      const increment = end / (duration / 16); // 60FPS mais suave
 
       const timer = setInterval(() => {
-        start += Math.ceil(end / (duration / stepTime));
+        start += increment;
         if (start >= end) {
           start = end;
           clearInterval(timer);
         }
-        setCount(start);
-      }, stepTime);
+        setCount(Math.floor(start));
+      }, 16);
 
       return () => clearInterval(timer);
     }, [target]);
@@ -46,6 +47,7 @@ const Home: FC = () => {
 
   return (
     <main className="relative min-h-screen bg-gray-50 dark:bg-[#0a0a0b] text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-hidden">
+
       {/* EFEITOS DE FUNDO */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <motion.div
@@ -63,6 +65,8 @@ const Home: FC = () => {
       {/* HERO */}
       <section className="container mx-auto px-6 lg:px-8 pt-16 pb-20 relative overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          {/* TEXTO */}
           <motion.div
             className="lg:col-span-6"
             initial={{ opacity: 0, x: -50 }}
@@ -105,9 +109,10 @@ const Home: FC = () => {
               transition={{ delay: 0.4, duration: 0.8 }}
             >
               Explore nossa nova coleção com o equilíbrio perfeito entre conforto
-              e design moderno. Feito para quem busca estilo e qualidade.
+              e design moderno.
             </motion.p>
 
+            {/* BOTÕES */}
             <motion.div
               className="mt-6 flex flex-wrap gap-3 items-center"
               initial={{ opacity: 0 }}
@@ -129,6 +134,7 @@ const Home: FC = () => {
               </Link>
             </motion.div>
 
+            {/* COUNTERS */}
             <motion.div
               className="mt-10 flex flex-wrap gap-8"
               initial={{ opacity: 0, y: 20 }}
@@ -141,7 +147,7 @@ const Home: FC = () => {
             </motion.div>
           </motion.div>
 
-          {/* IMAGEM HERO */}
+          {/* IMAGEM */}
           <motion.div
             className="lg:col-span-6 relative"
             initial={{ opacity: 0, x: 50 }}
@@ -155,23 +161,14 @@ const Home: FC = () => {
                 alt="Hero"
                 className="w-full h-full object-cover rounded-lg"
                 whileHover={{ scale: 1.08 }}
-                transition={{ type: 'spring', stiffness: 150, damping: 15 }}
+                transition={{ type: "spring", stiffness: 150, damping: 15 }}
               />
             </div>
           </motion.div>
         </div>
-
-        {/* FUNDO ANIMADO SUTIL */}
-        <motion.div
-          className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-primary/5 to-transparent opacity-50"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.5 }}
-          transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-        />
       </section>
 
-
-      {/* CAROUSEL DESTACADO */}
+      {/* CARROSSEL */}
       <section className="container mx-auto px-6 lg:px-8 mt-10 pb-20 relative">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-semibold tracking-tight">
@@ -210,7 +207,6 @@ const Home: FC = () => {
                     src={p.image}
                     alt={p.name}
                     className="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
                   />
                   {p.badge && (
                     <span className="absolute top-3 left-3 bg-primary text-white text-xs px-2 py-1 rounded-md shadow-sm">
@@ -224,13 +220,13 @@ const Home: FC = () => {
                     {p.name}
                   </h3>
                   <p className="mt-2 text-lg font-semibold text-primary dark:text-text-dark">
-                    {p.price}
+                    R$ {p.price}
                   </p>
 
                   <div className="mt-5 flex items-center gap-3">
                     <button
                       onClick={() => handleAddToCart(p)}
-                      className="flex-1 inline-flex items-center justify-center rounded-md px-3 py-2 bg-primary dark:bg-secondary-dark text-white font-medium hover:brightness-95 hover:shadow-md transition cursor-pointer"
+                      className="flex-1 inline-flex items-center justify-center rounded-md px-3 py-2 bg-primary dark:bg-secondary-dark text-white font-medium hover:brightness-95 hover:shadow-md transition"
                     >
                       Adicionar
                     </button>
@@ -248,96 +244,6 @@ const Home: FC = () => {
           ))}
         </Swiper>
       </section>
-      {/* BENEFÍCIOS */}
-      <section className="bg-gray-100 dark:bg-[#0f0f10] py-20 relative overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="container mx-auto px-6 lg:px-8 text-center"
-        >
-          <h2 className="text-3xl font-bold mb-14 tracking-tight">
-            Por que comprar com a gente?
-          </h2>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
-            {[
-              { icon: "🚚", title: "Frete Grátis", desc: "Para pedidos acima de R$199" },
-              { icon: "💳", title: "Pagamento Fácil", desc: "Em até 12x sem juros" },
-              { icon: "🔒", title: "Compra Segura", desc: "Protegemos seus dados com criptografia" },
-              { icon: "💬", title: "Suporte Rápido", desc: "Atendimento humanizado via chat" },
-            ].map((b, i) => (
-              <motion.div
-                key={b.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.2 }}
-                viewport={{ once: true }}
-                className="flex flex-col items-center bg-white dark:bg-[#101112] py-10 px-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
-              >
-                <span className="text-5xl mb-4">{b.icon}</span>
-                <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
-                  {b.title}
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed max-w-[200px]">
-                  {b.desc}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* EFEITO DE FUNDO SUTIL */}
-        <motion.div
-          className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/10 dark:bg-primary/5 blur-3xl rounded-full"
-          animate={{ opacity: [0.2, 0.4, 0.2], scale: [1, 1.1, 1] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </section>
-
-      {/* DEPOIMENTOS */}
-      <section className="container mx-auto px-6 lg:px-8 py-24 relative">
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-3xl font-bold mb-14 text-center tracking-tight"
-        >
-          O que nossos clientes dizem
-        </motion.h2>
-
-        <div className="grid md:grid-cols-3 gap-10">
-          {[
-            { name: "Lucas M.", text: "Produtos incríveis e entrega super rápida!" },
-            { name: "Ana C.", text: "A qualidade é impecável, recomendo demais!" },
-            { name: "Rafa S.", text: "Atendimento excelente e site fácil de usar!" },
-          ].map((t, i) => (
-            <motion.div
-              key={t.name}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-              viewport={{ once: true }}
-              className="relative bg-white dark:bg-[#101112] p-8 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300"
-            >
-              <span className="absolute -top-5 left-6 text-5xl text-primary opacity-30 select-none">
-                “
-              </span>
-              <p className="italic text-gray-600 dark:text-gray-300 mb-6 leading-relaxed relative z-10">
-                {t.text}
-              </p>
-              <div className="border-t border-gray-200 dark:border-gray-800 pt-3">
-                <span className="font-semibold text-primary dark:text-secondary">
-                  {t.name}
-                </span>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
     </main>
   );
 };
