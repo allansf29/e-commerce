@@ -1,39 +1,56 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FC } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import type { Product } from "../types/type";
 import { featuredProducts } from "../data/featuredProducts";
 
 const Home: FC = () => {
+  const prefersReducedMotion = useReducedMotion();
+
   const handleAddToCart = (product: Product) => {
-    alert(`${product.name} adicionado ao carrinho — ${product.price}`);
+    const priceBRL = Number(product.price).toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+    alert(`${product.name} adicionado ao carrinho — ${priceBRL}`);
   };
 
-  // 🔥 Contador REAL OFICIAL — suave, preciso, nunca passa do target
   const Counter = ({ target, label }: { target: number; label: string }) => {
     const [count, setCount] = useState(0);
+    const rafRef = useRef<number | null>(null);
 
     useEffect(() => {
-      let start = 0;
-      const end = target;
-      const duration = 1300;
+      if (prefersReducedMotion) {
+        setCount(target);
+        return;
+      }
 
-      const increment = end / (duration / 16); // 60FPS mais suave
+      const duration = 900; // ms
+      const startTime = performance.now();
 
-      const timer = setInterval(() => {
-        start += increment;
-        if (start >= end) {
-          start = end;
-          clearInterval(timer);
+      const tick = (now: number) => {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+        const current = Math.floor(target * eased);
+        setCount(current);
+
+        if (progress < 1) {
+          rafRef.current = requestAnimationFrame(tick);
+        } else {
+          setCount(target);
         }
-        setCount(Math.floor(start));
-      }, 16);
+      };
 
-      return () => clearInterval(timer);
-    }, [target]);
+      rafRef.current = requestAnimationFrame(tick);
+
+      return () => {
+        if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      };
+    }, [target, prefersReducedMotion]);
 
     return (
       <div className="flex flex-col">
@@ -45,50 +62,42 @@ const Home: FC = () => {
     );
   };
 
+  const optimizedImage = (url: string, w = 800, q = 60) => {
+    return url.includes("?") ? `${url}&q=${q}&w=${w}` : `${url}?auto=format&fit=crop&q=${q}&w=${w}`;
+  };
+
   return (
     <main className="relative min-h-screen bg-gray-50 dark:bg-[#0a0a0b] text-gray-900 dark:text-gray-100 transition-colors duration-300 overflow-hidden">
 
-      {/* EFEITOS DE FUNDO */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
+      <div className="hidden md:block absolute inset-0 -z-10 pointer-events-none">
         <motion.div
-          className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-primary/20 to-purple-500/20 blur-3xl"
-          animate={{ y: [0, 40, 0], x: [0, 30, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-0 left-1/4 w-[450px] h-[450px] rounded-full bg-primary/10 blur-3xl"
+          animate={!prefersReducedMotion ? { y: [0, 40, 0], opacity: [0.4, 0.6, 0.4] } : {}}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-0 right-1/3 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-blue-400/10 to-primary/20 blur-3xl"
-          animate={{ y: [0, -30, 0], x: [0, -20, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-0 right-1/3 w-[500px] h-[500px] rounded-full bg-purple-500/10 blur-3xl"
+          animate={!prefersReducedMotion ? { y: [0, -30, 0], opacity: [0.4, 0.6, 0.4] } : {}}
+          transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 
       {/* HERO */}
       <section className="container mx-auto px-6 lg:px-8 pt-16 pb-20 relative overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          
           {/* TEXTO */}
           <motion.div
             className="lg:col-span-6"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.6 }}
           >
-            <motion.span
-              className="inline-block px-3 py-1 rounded-full bg-primary/10 dark:bg-gray-900 text-primary dark:text-text-dark font-semibold text-sm mb-4"
-              initial={{ opacity: 0, y: -10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
+            <span className="inline-block px-3 py-1 rounded-full bg-primary/10 dark:bg-gray-900 text-primary font-semibold text-sm mb-4 dark:text-secondary">
               Coleção 2025
-            </motion.span>
+            </span>
 
-            <motion.h1
-              className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-            >
+            <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight">
               Encontre peças que{" "}
               <span className="text-detail relative">
                 combinam
@@ -96,50 +105,38 @@ const Home: FC = () => {
                   className="absolute left-0 bottom-0 w-full h-[6px] bg-primary/30 rounded-full"
                   initial={{ scaleX: 0 }}
                   whileInView={{ scaleX: 1 }}
-                  transition={{ delay: 0.6, duration: 0.7, ease: "easeOut" }}
+                  transition={{ duration: 0.8 }}
                 />
               </span>{" "}
               com seu estilo
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              className="mt-4 text-gray-600 dark:text-gray-300 max-w-xl leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-            >
-              Explore nossa nova coleção com o equilíbrio perfeito entre conforto
-              e design moderno.
-            </motion.p>
+            <p className="mt-4 text-gray-600 dark:text-gray-300 max-w-xl leading-relaxed">
+              Explore nossa nova coleção com o equilíbrio perfeito entre conforto e design moderno. Feito para quem busca estilo e qualidade.
+            </p>
 
-            {/* BOTÕES */}
-            <motion.div
-              className="mt-6 flex flex-wrap gap-3 items-center"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-            >
+            <div className="mt-6 flex flex-wrap gap-3 items-center">
               <Link
-                to="/produtos"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary text-white font-medium shadow-md hover:shadow-lg hover:scale-[1.03] hover:brightness-95 transition-all duration-300"
+                to="/products"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary text-white font-medium shadow-md hover:brightness-95 hover:shadow-lg transition-all duration-200"
               >
                 Comprar agora
               </Link>
 
               <Link
                 to="/ofertas"
-                className="text-sm text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-secondary hover:underline transition-colors"
+                className="text-sm text-gray-700 dark:text-gray-300 hover:text-primary hover:underline transition-colors"
               >
                 Ver promoções
               </Link>
-            </motion.div>
+            </div>
 
-            {/* COUNTERS */}
             <motion.div
               className="mt-10 flex flex-wrap gap-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
             >
               <Counter target={200} label="Marcas" />
               <Counter target={2000} label="Produtos" />
@@ -147,37 +144,31 @@ const Home: FC = () => {
             </motion.div>
           </motion.div>
 
-          {/* IMAGEM */}
+          {/* IMAGEM HERO */}
           <motion.div
             className="lg:col-span-6 relative"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.97 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
           >
             <div className="aspect-[16/12] w-full rounded-xl overflow-hidden bg-gradient-to-br from-white to-gray-100 dark:from-[#101112] dark:to-[#0b0b0d] flex items-center justify-end shadow-lg">
-              <motion.img
-                src="https://images.unsplash.com/photo-1760594386925-519fba2ad5ba?auto=format&fit=crop&q=80&w=687"
+              <img
+                src={optimizedImage(featuredProducts[0]?.image || "", 900, 60)}
                 alt="Hero"
+                loading="lazy"
                 className="w-full h-full object-cover rounded-lg"
-                whileHover={{ scale: 1.08 }}
-                transition={{ type: "spring", stiffness: 150, damping: 15 }}
               />
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* CARROSSEL */}
+      {/* CAROUSEL DESTACADO */}
       <section className="container mx-auto px-6 lg:px-8 mt-10 pb-20 relative">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl font-semibold tracking-tight">
-            Produtos em Destaque
-          </h2>
-          <Link
-            to="/products"
-            className="text-sm text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-secondary transition"
-          >
+          <h2 className="text-2xl font-semibold tracking-tight">Produtos em Destaque</h2>
+          <Link to="/products" className="text-sm text-gray-600 dark:text-gray-300 hover:text-primary transition">
             Ver todos
           </Link>
         </div>
@@ -195,17 +186,18 @@ const Home: FC = () => {
           autoplay={{ delay: 3500, disableOnInteraction: false }}
           className="pb-10"
         >
-          {featuredProducts.slice(0, 6).map((p) => (
+
+          {featuredProducts.slice(0, 8).map((p) => (
             <SwiperSlide key={p.id}>
               <motion.article
                 className="group bg-white dark:bg-[#101112] rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-800"
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.3 }}
+                whileHover={!prefersReducedMotion ? { y: -6 } : {}}
               >
                 <div className="relative overflow-hidden">
                   <img
-                    src={p.image}
+                    src={optimizedImage(p.image, 800, 60)}
                     alt={p.name}
+                    loading="lazy"
                     className="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-500"
                   />
                   {p.badge && (
@@ -216,24 +208,22 @@ const Home: FC = () => {
                 </div>
 
                 <div className="p-5">
-                  <h3 className="text-base font-medium line-clamp-1">
-                    {p.name}
-                  </h3>
+                  <h3 className="text-base font-medium line-clamp-1">{p.name}</h3>
                   <p className="mt-2 text-lg font-semibold text-primary dark:text-text-dark">
-                    R$ {p.price}
+                    {Number(p.price).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
                   </p>
 
                   <div className="mt-5 flex items-center gap-3">
                     <button
                       onClick={() => handleAddToCart(p)}
-                      className="flex-1 inline-flex items-center justify-center rounded-md px-3 py-2 bg-primary dark:bg-secondary-dark text-white font-medium hover:brightness-95 hover:shadow-md transition"
+                      className="flex-1 inline-flex items-center justify-center rounded-md px-3 py-2 bg-primary dark:bg-secondary-dark text-white font-medium hover:brightness-95 transition"
                     >
                       Adicionar
                     </button>
 
                     <Link
                       to={`/product/${p.id}`}
-                      className="inline-flex items-center justify-center px-3 py-2 rounded-md border border-gray-300 dark:border-gray-700 text-sm text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#151617] transition"
+                      className="inline-flex items-center justify-center px-3 py-2 rounded-md border border-gray-300 dark:border-gray-700 text-sm hover:bg-gray-100 dark:hover:bg-[#151617] transition"
                     >
                       Ver
                     </Link>
