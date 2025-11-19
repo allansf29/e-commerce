@@ -1,11 +1,19 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Twitter, Mail } from "lucide-react";
 
 const Footer = () => {
+  const reduce = useReducedMotion();
+
+  const fadeUp = {
+    hidden: { opacity: 0, y: reduce ? 0 : 30 },
+    show: { opacity: 1, y: 0 },
+  };
+
   return (
-    <footer className="relative bg-gray-100 dark:bg-[#0b0b0d] text-gray-800 dark:text-gray-200 mt-20">
-      {/* EFEITO DE FUNDO */}
+    <footer className="relative bg-gray-100 dark:bg-[#0b0b0d] text-gray-800 dark:text-gray-200 mt-20 overflow-hidden">
+
+      {/* FUNDO SUAVE */}
       <motion.div
         className="absolute inset-0 -z-10 bg-gradient-to-t from-primary/5 to-transparent opacity-70"
         initial={{ opacity: 0 }}
@@ -15,28 +23,34 @@ const Footer = () => {
 
       {/* CONTEÚDO */}
       <div className="container mx-auto px-6 lg:px-8 py-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-        {/* LOGO / SOBRE */}
+
+        {/* LOGO */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5 }}
         >
           <h3 className="text-2xl font-extrabold mb-3 tracking-tight">
             <span className="text-primary dark:text-secondary">Style</span>Store
           </h3>
+
           <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-            Encontre o estilo que combina com você. Moda, conforto e qualidade em
-            um só lugar.
+            Encontre o estilo que combina com você. Moda, conforto e qualidade em um só lugar.
           </p>
         </motion.div>
 
         {/* LINKS */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
           <h4 className="text-lg font-semibold mb-4">Navegação</h4>
+
           <ul className="space-y-2 text-sm">
             {[
               { name: "Início", to: "/" },
@@ -57,11 +71,14 @@ const Footer = () => {
 
         {/* AJUDA */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
           <h4 className="text-lg font-semibold mb-4">Ajuda</h4>
+
           <ul className="space-y-2 text-sm">
             {[
               "Entrega e Frete",
@@ -81,22 +98,27 @@ const Footer = () => {
           </ul>
         </motion.div>
 
-        {/* NEWSLETTER / REDES SOCIAIS */}
+        {/* NEWSLETTER */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
         >
           <h4 className="text-lg font-semibold mb-4">Fique por dentro</h4>
+
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
             Receba novidades e promoções exclusivas:
           </p>
+
           <form className="flex items-center gap-2">
             <input
               type="email"
               placeholder="Seu e-mail"
               className="flex-1 px-3 py-2 rounded-lg bg-white dark:bg-[#101112] border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secondary text-sm"
             />
+
             <button
               type="submit"
               className="px-4 py-2 rounded-lg bg-primary dark:bg-secondary text-white dark:text-detail-dark font-medium hover:brightness-95 transition cursor-pointer"
@@ -105,15 +127,19 @@ const Footer = () => {
             </button>
           </form>
 
-          {/* REDES SOCIAIS */}
+          {/* REDES */}
           <div className="flex items-center gap-4 mt-5">
             {[Facebook, Instagram, Twitter, Mail].map((Icon, i) => (
               <motion.a
                 key={i}
                 href="#"
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-200 dark:bg-[#151617] hover:bg-primary hover:text-white dark:hover:bg-secondary transition hover:dark:text-detail-dark"
+                whileHover={{ scale: reduce ? 1 : 1.2 }}
+                whileTap={{ scale: reduce ? 1 : 0.95 }}
+                className="w-9 h-9 flex items-center justify-center rounded-full 
+                           bg-gray-200 dark:bg-[#151617] 
+                           hover:bg-primary hover:text-white 
+                           dark:hover:bg-secondary hover:dark:text-detail-dark 
+                           transition"
               >
                 <Icon size={18} />
               </motion.a>
@@ -124,12 +150,16 @@ const Footer = () => {
 
       {/* LINHA FINAL */}
       <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
-        className="border-t border-gray-300 dark:border-gray-800 py-6 text-center text-sm text-gray-600 dark:text-gray-500"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, delay: 0.4 }}
+        className="border-t border-gray-300 dark:border-gray-800 py-6 text-center text-sm 
+                   text-gray-600 dark:text-gray-500"
       >
-        © {new Date().getFullYear()} <span className="font-semibold">EcomStore</span>. Imagens retiradas do Unsplash para exemplos de produtos.
+        © {new Date().getFullYear()}{" "}
+        <span className="font-semibold">EcomStore</span>. Imagens retiradas do Unsplash para exemplos.
       </motion.div>
     </footer>
   );
