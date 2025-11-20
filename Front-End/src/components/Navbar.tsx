@@ -127,11 +127,6 @@ const Navbar: React.FC = () => {
           >
             Contato
           </Link>
-
-          {/* <div className="border-t border-border pt-3 flex items-center justify-between">
-            <span className="text-sm text-muted-foreground">Tema:</span>
-            <ThemeToggle />
-          </div> */}
         </motion.div>
       )}
     </header>

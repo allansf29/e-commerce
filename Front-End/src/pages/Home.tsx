@@ -124,7 +124,7 @@ const Home: FC = () => {
               </Link>
 
               <Link
-                to="/ofertas"
+                to="/"
                 className="text-sm text-gray-700 dark:text-gray-300 hover:text-primary hover:underline transition-colors"
               >
                 Ver promoções
