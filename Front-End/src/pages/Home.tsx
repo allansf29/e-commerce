@@ -125,7 +125,7 @@ const Home: FC = () => {
 
               <Link
                 to="/"
-                className="text-sm text-gray-700 dark:text-gray-300 hover:text-primary hover:underline transition-colors"
+                className="text-sm text-gray-700 dark:text-gray-300 hover:text-primary hover:underline transition-colors dark:text-secondary"
               >
                 Ver promoções
               </Link>
@@ -168,7 +168,7 @@ const Home: FC = () => {
       <section className="container mx-auto px-6 lg:px-8 mt-10 pb-20 relative">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-semibold tracking-tight">Produtos em Destaque</h2>
-          <Link to="/products" className="text-sm text-gray-600 dark:text-gray-300 hover:text-primary transition">
+          <Link to="/products" className="text-sm text-gray-600 dark:text-gray-300 hover:text-primary transition dark:text-secondary">
             Ver todos
           </Link>
         </div>
