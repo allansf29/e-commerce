@@ -93,7 +93,7 @@ const Home: FC = () => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block px-3 py-1 rounded-full bg-primary/10 dark:bg-gray-900 text-primary font-semibold text-sm mb-4 dark:text-secondary">
+            <span className="inline-block px-3 py-1 rounded-full bg-primary/10 dark:bg-gray-900 text-primary font-semibold text-sm mb-4 dark:text-white hover:dark:text-secondary">
               Coleção 2025
             </span>
 
@@ -125,7 +125,7 @@ const Home: FC = () => {
 
               <Link
                 to="/"
-                className="text-sm text-gray-700 dark:text-gray-300 hover:text-primary hover:underline transition-colors dark:text-secondary"
+                className="text-sm text-gray-700 dark:text-gray-300 hover:text-primary hover:underline transition-colors dark:text-white hover:dark:text-secondary"
               >
                 Ver promoções
               </Link>
