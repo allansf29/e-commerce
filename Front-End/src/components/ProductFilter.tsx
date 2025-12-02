@@ -33,7 +33,7 @@ export default function ProductFilter() {
       <div className="mb-6">
         <button
           onClick={() => toggleSection("size")}
-          className="flex w-full justify-between items-center mb-2 cursor-pointer hover:text-indigo-500 transition"
+          className="flex w-full justify-between items-center mb-2 cursor-pointer hover:text-indigo-500 transition dark:text-white"
         >
           <span className="font-medium text-sm text-gray-700 dark:text-gray-300">
             Size
@@ -67,7 +67,7 @@ export default function ProductFilter() {
       <div className="mb-6">
         <button
           onClick={() => toggleSection("availability")}
-          className="flex w-full justify-between items-center mb-2 cursor-pointer hover:text-indigo-500 transition"
+          className="flex w-full justify-between items-center mb-2 cursor-pointer hover:text-indigo-500 transition dark:text-white"
         >
           <span className="font-medium text-sm text-gray-700 dark:text-gray-300">
             Availability
@@ -105,7 +105,7 @@ export default function ProductFilter() {
         {["T-Shirts", "Pants", "Hoodies", "Shoes", "Accessories"].map((item) => (
           <label
             key={item}
-            className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-indigo-500 transition"
+            className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-indigo-500 transition dark:text-white"
           >
             <input type="checkbox" className="accent-indigo-600 cursor-pointer" />
             {item}
@@ -123,7 +123,7 @@ export default function ProductFilter() {
           {["#000000", "#ffffff", "#f87171", "#60a5fa", "#34d399", "#facc15"].map((color) => (
             <div
               key={color}
-              className="w-6 h-6 rounded-full border border-gray-300 dark:border-neutral-700 cursor-pointer hover:scale-110 transition-transform"
+              className="w-6 h-6 rounded-full border border-gray-300 dark:border-neutral-700 cursor-pointer hover:scale-110 transition-transform dark:text-white"
               style={{ backgroundColor: color }}
             ></div>
           ))}
@@ -157,7 +157,7 @@ export default function ProductFilter() {
         {["Summer", "Winter", "Essentials", "Limited Edition"].map((item) => (
           <label
             key={item}
-            className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-indigo-500 transition"
+            className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 cursor-pointer hover:text-indigo-500 transition dark:text-white"
           >
             <input type="checkbox" className="accent-indigo-600 cursor-pointer" />
             {item}
@@ -171,11 +171,11 @@ export default function ProductFilter() {
         isOpen={openSections.tags}
         onToggle={() => toggleSection("tags")}
       >
-        <div className="flex flex-wrap gap-2 dark:text-text-dark">
+        <div className="flex flex-wrap gap-2 dark:text-text-dark dark:text-white">
           {["New", "Sale", "Hot", "Trending"].map((tag) => (
             <span
               key={tag}
-              className="px-2 py-1 text-xs border border-gray-300 dark:border-neutral-700 rounded-md cursor-pointer hover:bg-indigo-100 dark:hover:bg-indigo-800 hover:text-indigo-600 dark:hover:text-indigo-300 transition"
+              className="px-2 py-1 text-xs border border-gray-300 dark:border-neutral-700 rounded-md cursor-pointer hover:bg-indigo-100 dark:hover:bg-indigo-800 hover:text-indigo-600 dark:hover:text-indigo-300 transition dark:text-white"
             >
               {tag}
             </span>
@@ -192,7 +192,7 @@ export default function ProductFilter() {
         {[5, 4, 3, 2, 1].map((stars) => (
           <div
             key={stars}
-            className="flex items-center gap-1 text-sm cursor-pointer hover:text-indigo-500 transition dark:text-text-dark"
+            className="flex items-center gap-1 text-sm cursor-pointer hover:text-indigo-500 transition dark:text-text-dark dark:text-white"
           >
             {"★".repeat(stars)}{"☆".repeat(5 - stars)}
           </div>
