@@ -33,7 +33,7 @@ export default function ProductFilter() {
       <div className="mb-6">
         <button
           onClick={() => toggleSection("size")}
-          className="flex w-full justify-between items-center mb-2 cursor-pointer hover:text-indigo-500 transition"
+          className="flex w-full justify-between items-center mb-2 cursor-pointer hover:text-indigo-500 transition dark:text-white"
         >
           <span className="font-medium text-sm text-gray-700 dark:text-gray-300">
             Size
