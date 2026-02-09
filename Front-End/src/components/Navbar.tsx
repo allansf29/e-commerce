@@ -71,7 +71,7 @@ const Navbar: React.FC = () => {
             <Heart className="w-6 h-6" />
           </Link>
           <Link
-            to="/carrinho"
+            to="/cart"
             className="text-muted-foreground hover:text-secondary dark:text-muted-foreground dark:hover:text-secondary-dark transition relative dark:text-text-dark"
           >
             <ShoppingCart className="w-6 h-6" />
