@@ -77,7 +77,7 @@ export default function Cart() {
                   <div className="flex items-center gap-3 mt-2">
                     <button
                       onClick={() => decreaseQuantity(item.id)}
-                      className="bg-zinc-700 px-3 py-1 rounded cursor-pointer"
+                      className="bg-zinc-700 px-3 py-1 rounded cursor-pointer hover:bg-gray-500 transition-all duration-300"
                     >
                       -
                     </button>
@@ -86,7 +86,7 @@ export default function Cart() {
 
                     <button
                       onClick={() => increaseQuantity(item.id)}
-                      className="bg-zinc-700 px-3 py-1 rounded cursor-pointer"
+                      className="bg-zinc-700 px-3 py-1 rounded cursor-pointer hover:bg-gray-500 transition-all duration-300"
                     >
                       +
                     </button>
@@ -116,7 +116,7 @@ export default function Cart() {
               </span>
             </div>
 
-            <button className="w-full mt-4 bg-white text-black py-3 rounded-lg font-semibold hover:opacity-90 cursor-pointer">
+            <button className="w-full mt-4 bg-white text-black py-3 rounded-lg font-semibold hover:opacity-90 cursor-pointer hover:-translate-y-0.5 transition-all duration-300">
               Ir para pagamento
             </button>
           </div>
