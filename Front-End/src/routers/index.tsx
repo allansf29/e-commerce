@@ -4,6 +4,7 @@ import Products from "../pages/Products";
 import Contact from "../pages/Contact";
 import ProductPage from "../pages/ProductPage";
 import Cart from "../pages/Cart";
+import Profile from "../pages/Profile";
 
 export default function AppRoutes() {
   return (
@@ -13,6 +14,7 @@ export default function AppRoutes() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/product/:id" element={<ProductPage />} />
       <Route path="/cart" element={<Cart />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 }

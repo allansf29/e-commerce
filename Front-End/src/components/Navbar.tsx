@@ -80,7 +80,7 @@ const Navbar: React.FC = () => {
             </span>
           </Link>
           <Link
-            to="/perfil"
+            to="/profile"
             className="text-muted-foreground hover:text-secondary dark:text-muted-foreground dark:hover:text-secondary-dark transition dark:text-text-dark"
           >
             <User className="w-6 h-6" />
