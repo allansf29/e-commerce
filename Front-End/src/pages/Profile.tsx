@@ -54,11 +54,11 @@ export default function Profile() {
               <h2 className="mt-4 text-xl font-semibold">{user.name}</h2>
               <p className="text-gray-500 dark:text-gray-400">{user.email}</p>
 
-              <button className="mt-6 w-full bg-primary text-white py-2 rounded-full hover:brightness-95 transition">
+              <button className="mt-6 w-full bg-primary hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-400 text-white py-2 rounded-full hover:brightness-95 transition cursor-pointer">
                 Editar Perfil
               </button>
 
-              <button className="mt-3 w-full border border-red-500 text-red-500 py-2 rounded-full hover:bg-red-500 hover:text-white transition">
+              <button className="mt-3 w-full border border-red-500 text-red-500 py-2 rounded-full hover:bg-red-500 hover:text-white transition cursor-pointer">
                 Sair da Conta
               </button>
             </div>
@@ -81,7 +81,7 @@ export default function Profile() {
 
               <div className="bg-white dark:bg-[#101112] rounded-xl p-6 shadow-md border border-gray-100 dark:border-gray-800">
                 <p className="text-sm text-gray-500 dark:text-gray-400">Total gasto</p>
-                <h3 className="text-2xl font-bold mt-2 text-primary">
+                <h3 className="text-2xl font-bold mt-2 text-primary dark:text-white">
                   {user.totalSpent.toLocaleString("pt-BR", {
                     style: "currency",
                     currency: "BRL",
