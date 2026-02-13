@@ -1,13 +1,9 @@
 import { ShoppingCart, Heart, Eye } from "lucide-react"
 import { useNavigate } from "react-router-dom"
+import { useFavorites } from "../components/FavoritesContext"
+import type { Product } from "../types/type"
 
-type ProductProps = {
-  id: string
-  name: string
-  category: string
-  price: number
-  image: string
-}
+type ProductProps = Product
 
 const formatCurrency = (amount: number): string => {
   return new Intl.NumberFormat("pt-BR", {
@@ -23,12 +19,21 @@ export default function ProductCard({
   category,
   price,
   image,
+  description,
 }: ProductProps) {
   const navigate = useNavigate()
+  const { toggleFavorite, isFavorite } = useFavorites()
 
   const handleView = () => {
     navigate(`/product/${id}`)
   }
+
+  const handleFavorite = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    toggleFavorite({ id, name, category, price, image, description })
+  }
+
+  const favorite = isFavorite(id)
 
   return (
     <div
@@ -38,6 +43,7 @@ export default function ProductCard({
         hover:-translate-y-0.5 transition-all duration-300 bg-white dark:bg-black cursor-pointer
       "
     >
+      
       <div className="w-full aspect-square overflow-hidden rounded-lg relative">
         <img
           src={image}
@@ -45,8 +51,17 @@ export default function ProductCard({
           className="w-full h-full object-cover group-hover/card:scale-[1.05] transition-transform duration-500"
         />
 
-        <button className="absolute top-3 right-3 p-2 bg-white dark:bg-gray-700 rounded-full text-gray-500 hover:text-red-500 opacity-0 group-hover/card:opacity-100 transition duration-300 shadow-md cursor-pointer">
-          <Heart size={18} fill="currentColor" />
+        {/* FAVORITE BUTTON */}
+        <button
+          onClick={handleFavorite}
+          className={`
+            absolute top-3 right-3 p-2 rounded-full shadow-md cursor-pointer transition duration-300
+            ${favorite
+              ? "bg-red-500 text-white"
+              : "bg-white dark:bg-gray-700 text-gray-500 hover:text-red-500 opacity-0 group-hover/card:opacity-100"}
+          `}
+        >
+          <Heart size={18} fill={favorite ? "currentColor" : "none"} />
         </button>
       </div>
 
@@ -54,9 +69,11 @@ export default function ProductCard({
         <p className="text-xs uppercase font-medium tracking-widest text-gray-500 dark:text-gray-400">
           {category}
         </p>
+
         <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 line-clamp-2">
           {name}
         </h3>
+
         <p className="text-xl font-extrabold text-indigo-600 dark:text-indigo-400 pt-1">
           {formatCurrency(price)}
         </p>

@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
         <div className="flex items-center gap-4">
           
           <Link
-            to="/favoritos"
+            to="/favorites"
             className="text-muted-foreground hover:text-secondary dark:text-muted-foreground dark:hover:text-secondary-dark transition dark:text-text-dark"
           >
             <Heart className="w-6 h-6" />
