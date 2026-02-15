@@ -1,15 +1,17 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
+import { useFavorites } from "../components/FavoritesContext";
 
 export default function Profile() {
   const prefersReducedMotion = useReducedMotion();
+
+  const { favorites } = useFavorites();
 
   const [user] = useState({
     name: "Allan Victor",
     email: "allan@email.com",
     avatar: "https://api.dicebear.com/7.x/initials/svg?seed=Allan",
     orders: 12,
-    favorites: 5,
     totalSpent: 2499.9,
   });
 
@@ -22,7 +24,7 @@ export default function Profile() {
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-[#0a0a0b] text-gray-900 dark:text-gray-100 transition-colors duration-300">
 
-      {/* Background blur igual home */}
+      {/* background blur */}
       <div className="hidden md:block absolute inset-0 -z-10 pointer-events-none">
         <motion.div
           className="absolute top-20 left-1/4 w-[400px] h-[400px] rounded-full bg-primary/10 blur-3xl"
@@ -54,7 +56,7 @@ export default function Profile() {
               <h2 className="mt-4 text-xl font-semibold">{user.name}</h2>
               <p className="text-gray-500 dark:text-gray-400">{user.email}</p>
 
-              <button className="mt-6 w-full bg-gray-800 hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-400 text-white py-2 rounded-full hover:brightness-95 transition cursor-pointer">
+              <button className="mt-6 w-full bg-gray-800 hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-400 text-white py-2 rounded-full transition cursor-pointer">
                 Editar Perfil
               </button>
 
@@ -64,11 +66,11 @@ export default function Profile() {
             </div>
           </motion.div>
 
-          {/* RESUMO */}
           <div className="lg:col-span-2 space-y-8">
 
             {/* Estatísticas */}
             <div className="grid sm:grid-cols-3 gap-6">
+
               <div className="bg-white dark:bg-[#101112] rounded-xl p-6 shadow-md border border-gray-100 dark:border-gray-800">
                 <p className="text-sm text-gray-500 dark:text-gray-400">Pedidos</p>
                 <h3 className="text-2xl font-bold mt-2">{user.orders}</h3>
@@ -76,9 +78,12 @@ export default function Profile() {
 
               <div className="bg-white dark:bg-[#101112] rounded-xl p-6 shadow-md border border-gray-100 dark:border-gray-800">
                 <p className="text-sm text-gray-500 dark:text-gray-400">Favoritos</p>
-                <h3 className="text-2xl font-bold mt-2">{user.favorites}</h3>
+                <h3 className="text-2xl font-bold mt-2">
+                  {favorites.length}
+                </h3>
               </div>
 
+              {/* Total gasto */}
               <div className="bg-white dark:bg-[#101112] rounded-xl p-6 shadow-md border border-gray-100 dark:border-gray-800">
                 <p className="text-sm text-gray-500 dark:text-gray-400">Total gasto</p>
                 <h3 className="text-2xl font-bold mt-2 text-primary dark:text-white">
@@ -88,6 +93,7 @@ export default function Profile() {
                   })}
                 </h3>
               </div>
+
             </div>
 
             {/* Pedidos recentes */}
@@ -114,6 +120,7 @@ export default function Profile() {
                           currency: "BRL",
                         })}
                       </p>
+
                       <span
                         className={`text-xs px-2 py-1 rounded-full ${
                           order.status === "Entregue"

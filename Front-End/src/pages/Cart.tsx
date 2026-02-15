@@ -104,7 +104,7 @@ export default function Cart() {
           </div>
 
           {/* Resumo */}
-          <div className="bg-zinc-900 p-6 rounded-xl h-fit">
+          <div className="bg-zinc-700 dark:bg-zinc-900 p-6 rounded-xl h-fit">
             <h2 className="text-xl font-semibold mb-4">
               Resumo do Pedido
             </h2>
