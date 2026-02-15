@@ -54,7 +54,7 @@ export default function Profile() {
               <h2 className="mt-4 text-xl font-semibold">{user.name}</h2>
               <p className="text-gray-500 dark:text-gray-400">{user.email}</p>
 
-              <button className="mt-6 w-full bg-primary hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-400 text-white py-2 rounded-full hover:brightness-95 transition cursor-pointer">
+              <button className="mt-6 w-full bg-gray-800 hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-400 text-white py-2 rounded-full hover:brightness-95 transition cursor-pointer">
                 Editar Perfil
               </button>
 

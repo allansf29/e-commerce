@@ -53,7 +53,7 @@ const Favorites = () => {
               {/* BOTÃO REMOVER */}
               <button
                 onClick={() => removeFavorite(product.id)}
-                className="absolute top-3 right-3 p-2 bg-black/60 hover:bg-red-600 text-white rounded-full shadow-md transition"
+                className="absolute top-3 right-3 p-2 bg-black/60 hover:bg-red-600 text-white rounded-full shadow-md transition cursor-pointer"
               >
                 <Trash2 size={18} />
               </button>
@@ -73,7 +73,7 @@ const Favorites = () => {
               <div className="mt-5 flex items-center gap-3">
                 <button
                   onClick={() => navigate(`/product/${product.id}`)}
-                  className="flex-1 inline-flex items-center justify-center rounded-md px-3 py-2 border border-gray-300 dark:border-gray-700 text-sm hover:bg-gray-100 dark:hover:bg-[#151617] transition"
+                  className="flex-1 inline-flex items-center justify-center rounded-md px-3 py-2 border border-gray-300 dark:border-gray-700 text-sm hover:bg-gray-100 dark:hover:bg-[#151617] transition cursor-pointer"
                 >
                   <Eye size={18} className="mr-2" />
                   Ver produto
@@ -81,7 +81,7 @@ const Favorites = () => {
 
                 <button
                   onClick={() => removeFavorite(product.id)}
-                  className="inline-flex items-center justify-center px-3 py-2 rounded-md bg-red-600 text-white hover:bg-red-700 transition"
+                  className="inline-flex items-center justify-center px-3 py-2 rounded-md bg-red-600 text-white hover:bg-red-700 transition cursor-pointer"
                 >
                   <Trash2 size={18} />
                 </button>
