@@ -1,14 +1,17 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './styles/global.css'
-import { FavoritesProvider } from "./components/FavoritesContext.tsx";
-import App from './App.tsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./styles/global.css";
 
-createRoot(document.getElementById('root')!).render(
+import { FavoritesProvider } from "./components/FavoritesContext";
+import { CartProvider } from "./components/CartContext";
+import App from "./App";
+
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-       <FavoritesProvider>
+    <CartProvider>
+      <FavoritesProvider>
         <App />
-       </FavoritesProvider>
-    
-  </StrictMode>,
-)
+      </FavoritesProvider>
+    </CartProvider>
+  </StrictMode>
+);
