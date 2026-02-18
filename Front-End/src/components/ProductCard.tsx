@@ -1,6 +1,7 @@
 import { ShoppingCart, Heart, Eye } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import { useFavorites } from "../components/FavoritesContext"
+import { useCart } from "../components/CartContext" // 👈 IMPORTANTE
 import type { Product } from "../types/type"
 
 type ProductProps = Product
@@ -24,6 +25,9 @@ export default function ProductCard({
   const navigate = useNavigate()
   const { toggleFavorite, isFavorite } = useFavorites()
 
+  // 👇 carrinho
+  const { addToCart } = useCart()
+
   const handleView = () => {
     navigate(`/product/${id}`)
   }
@@ -31,6 +35,20 @@ export default function ProductCard({
   const handleFavorite = (e: React.MouseEvent) => {
     e.stopPropagation()
     toggleFavorite({ id, name, category, price, image, description })
+  }
+
+  // função de adicionar
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    addToCart({
+      id,
+      name,
+      category,
+      price,
+      image,
+      description,
+      quantity: 1,
+    })
   }
 
   const favorite = isFavorite(id)
@@ -81,6 +99,7 @@ export default function ProductCard({
 
       <div className="flex gap-2 mt-4">
         <button
+          onClick={handleAddToCart}  // 👈 AQUI
           className="
             flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg cursor-pointer
             bg-indigo-600 text-white font-semibold 
