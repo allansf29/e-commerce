@@ -6,16 +6,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import type { Product } from "../types/type";
 import { featuredProducts } from "../data/featuredProducts";
+import { useCart } from "../components/CartContext"; // 👈 ADICIONADO
 
 const Home: FC = () => {
   const prefersReducedMotion = useReducedMotion();
 
+  const { addToCart } = useCart();
+
   const handleAddToCart = (product: Product) => {
-    const priceBRL = Number(product.price).toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
+    addToCart({
+      ...product,
+      quantity: 1,
     });
-    alert(`${product.name} adicionado ao carrinho — ${priceBRL}`);
   };
 
   const Counter = ({ target, label }: { target: number; label: string }) => {
@@ -28,13 +30,13 @@ const Home: FC = () => {
         return;
       }
 
-      const duration = 900; // ms
+      const duration = 900;
       const startTime = performance.now();
 
       const tick = (now: number) => {
         const elapsed = now - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+        const eased = 1 - Math.pow(1 - progress, 3);
         const current = Math.floor(target * eased);
         setCount(current);
 
@@ -63,7 +65,9 @@ const Home: FC = () => {
   };
 
   const optimizedImage = (url: string, w = 800, q = 60) => {
-    return url.includes("?") ? `${url}&q=${q}&w=${w}` : `${url}?auto=format&fit=crop&q=${q}&w=${w}`;
+    return url.includes("?")
+      ? `${url}&q=${q}&w=${w}`
+      : `${url}?auto=format&fit=crop&q=${q}&w=${w}`;
   };
 
   return (
@@ -82,10 +86,9 @@ const Home: FC = () => {
         />
       </div>
 
-      {/* HERO */}
       <section className="container mx-auto px-6 lg:px-8 pt-16 pb-20 relative overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* TEXTO */}
+          
           <motion.div
             className="lg:col-span-6"
             initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
@@ -112,7 +115,7 @@ const Home: FC = () => {
             </h1>
 
             <p className="mt-4 text-gray-600 dark:text-gray-300 max-w-xl leading-relaxed">
-              Explore nossa nova coleção com o equilíbrio perfeito entre conforto e design moderno. Feito para quem busca estilo e qualidade.
+              Explore nossa nova coleção com o equilíbrio perfeito entre conforto e design moderno.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3 items-center">
@@ -144,7 +147,6 @@ const Home: FC = () => {
             </motion.div>
           </motion.div>
 
-          {/* IMAGEM HERO */}
           <motion.div
             className="lg:col-span-6 relative"
             initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.97 }}
@@ -164,7 +166,6 @@ const Home: FC = () => {
         </div>
       </section>
 
-      {/* CAROUSEL DESTACADO */}
       <section className="container mx-auto px-6 lg:px-8 mt-10 pb-20 relative">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-semibold tracking-tight">Produtos em Destaque</h2>
@@ -186,7 +187,6 @@ const Home: FC = () => {
           autoplay={{ delay: 3500, disableOnInteraction: false }}
           className="pb-10"
         >
-
           {featuredProducts.slice(0, 8).map((p) => (
             <SwiperSlide key={p.id}>
               <motion.article
@@ -216,7 +216,7 @@ const Home: FC = () => {
                   <div className="mt-5 flex items-center gap-3">
                     <button
                       onClick={() => handleAddToCart(p)}
-                      className="flex-1 inline-flex items-center justify-center rounded-md px-3 py-2 bg-primary dark:bg-secondary-dark text-white font-medium hover:brightness-95 transition"
+                      className="flex-1 inline-flex items-center justify-center rounded-md px-3 py-2 bg-primary dark:bg-secondary-dark text-white font-medium hover:brightness-95 transition cursor-pointer"
                     >
                       Adicionar
                     </button>
