@@ -1,20 +1,31 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { featuredProducts } from "../data/featuredProducts";
+import { useCart } from "../components/CartContext"; // 👈 ADICIONADO
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
+  const { addToCart } = useCart(); // 👈 PEGAMOS DO CONTEXT
+
   const product = featuredProducts.find((p) => p.id === id);
 
-  // Função de voltar com fallback (caso o histórico não exista)
   const handleBack = () => {
     if (window.history.length > 1) {
       navigate(-1);
     } else {
-      navigate("/"); // fallback pra home
+      navigate("/");
     }
+  };
+
+  const handleAddToCart = () => {
+    if (!product) return;
+
+    addToCart({
+      ...product,
+      quantity: 1,
+    });
   };
 
   if (!product) {
@@ -33,7 +44,6 @@ const ProductPage = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      {/* Botão Voltar */}
       <button
         onClick={handleBack}
         className="flex items-center gap-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 mb-6 cursor-pointer"
@@ -42,7 +52,6 @@ const ProductPage = () => {
       </button>
 
       <div className="grid md:grid-cols-2 gap-10">
-        {/* Imagem */}
         <div className="rounded-2xl overflow-hidden shadow-lg bg-gray-100 dark:bg-[#101112]">
           <img
             src={product.image}
@@ -51,7 +60,6 @@ const ProductPage = () => {
           />
         </div>
 
-        {/* Detalhes */}
         <div className="flex flex-col justify-center">
           <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-3">
             {product.name}
@@ -74,7 +82,10 @@ const ProductPage = () => {
           </span>
 
           <div className="flex gap-3">
-            <button className="bg-indigo-600 text-white px-6 py-3 rounded-xl hover:scale-105 transition-all font-medium shadow-md cursor-pointer">
+            <button
+              onClick={handleAddToCart}
+              className="bg-indigo-600 text-white px-6 py-3 rounded-xl hover:scale-105 transition-all font-medium shadow-md cursor-pointer"
+            >
               Adicionar ao Carrinho
             </button>
 

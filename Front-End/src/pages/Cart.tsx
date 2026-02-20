@@ -47,7 +47,7 @@ export default function Cart() {
                   <div className="flex items-center gap-3 mt-2">
                     <button
                       onClick={() => decreaseQuantity(item.id)}
-                      className="bg-zinc-700 px-3 py-1 rounded hover:bg-gray-500"
+                      className="bg-zinc-700 px-3 py-1 rounded hover:bg-gray-500 cursor-pointer"
                     >
                       -
                     </button>
@@ -58,14 +58,14 @@ export default function Cart() {
 
                     <button
                       onClick={() => increaseQuantity(item.id)}
-                      className="bg-zinc-700 px-3 py-1 rounded hover:bg-gray-500"
+                      className="bg-zinc-700 px-3 py-1 rounded hover:bg-gray-500 cursor-pointer"
                     >
                       +
                     </button>
 
                     <button
                       onClick={() => removeItem(item.id)}
-                      className="ml-4 text-red-400 hover:text-red-300"
+                      className="ml-4 text-red-400 hover:text-red-300 cursor-pointer"
                     >
                       Remover
                     </button>
@@ -88,7 +88,7 @@ export default function Cart() {
               </span>
             </div>
 
-            <button className="w-full mt-4 bg-white text-black py-3 rounded-lg font-semibold hover:opacity-90">
+            <button className="w-full mt-4 bg-white text-black py-3 rounded-lg font-semibold hover:opacity-90 cursor-pointer">
               Ir para pagamento
             </button>
           </div>
