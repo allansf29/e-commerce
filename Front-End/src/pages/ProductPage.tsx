@@ -1,13 +1,12 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { featuredProducts } from "../data/featuredProducts";
-import { useCart } from "../components/CartContext"; // 👈 ADICIONADO
+import { useCart } from "../components/CartContext";
 
 const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-
-  const { addToCart } = useCart(); // 👈 PEGAMOS DO CONTEXT
+  const { addToCart } = useCart();
 
   const product = featuredProducts.find((p) => p.id === id);
 
@@ -17,15 +16,6 @@ const ProductPage = () => {
     } else {
       navigate("/");
     }
-  };
-
-  const handleAddToCart = () => {
-    if (!product) return;
-
-    addToCart({
-      ...product,
-      quantity: 1,
-    });
   };
 
   if (!product) {
@@ -41,6 +31,13 @@ const ProductPage = () => {
       </div>
     );
   }
+
+  const handleAddToCart = () => {
+    addToCart({
+      ...product,
+      quantity: 1,
+    });
+  };
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">

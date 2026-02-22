@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
+import { useToast } from "./ToastContext";
 
 export type CartItem = {
   id: string;
@@ -13,7 +14,7 @@ export type CartItem = {
 
 type CartContextType = {
   cartItems: CartItem[];
-  addToCart: (product: CartItem) => void; // 👈 ADICIONADO
+  addToCart: (product: CartItem) => void;
   increaseQuantity: (id: string) => void;
   decreaseQuantity: (id: string) => void;
   removeItem: (id: string) => void;
@@ -24,14 +25,14 @@ const CartContext = createContext<CartContextType | null>(null);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const { showToast } = useToast();
 
-  // ADICIONAR AO CARRINHO
   function addToCart(product: CartItem) {
     setCartItems((prev) => {
       const existingItem = prev.find((item) => item.id === product.id);
 
       if (existingItem) {
-        // se já existe, aumenta quantidade
+        showToast("Quantidade aumentada no carrinho!");
         return prev.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
@@ -39,6 +40,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         );
       }
 
+      showToast("Produto adicionado ao carrinho!");
       return [...prev, product];
     });
   }

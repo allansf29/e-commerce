@@ -4,14 +4,17 @@ import "./styles/global.css";
 
 import { FavoritesProvider } from "./components/FavoritesContext";
 import { CartProvider } from "./components/CartContext";
+import { ToastProvider } from "./components/ToastContext";
 import App from "./App";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <CartProvider>
-      <FavoritesProvider>
-        <App />
-      </FavoritesProvider>
-    </CartProvider>
+    <ToastProvider>
+      <CartProvider>
+        <FavoritesProvider>
+          <App />
+        </FavoritesProvider>
+      </CartProvider>
+    </ToastProvider>
   </StrictMode>
 );
