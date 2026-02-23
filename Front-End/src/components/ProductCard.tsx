@@ -57,7 +57,7 @@ export default function ProductCard({
     <div
       className="
         flex flex-col p-4 rounded-xl border border-gray-100 dark:border-neutral-800 group/card
-        shadow-sm hover:shadow-lg hover:border-indigo-500 dark:hover:border-indigo-400 
+        shadow-sm hover:shadow-lg hover:border-indigo-500 dark:hover:border-indigo-200 
         hover:-translate-y-0.5 transition-all duration-300 bg-white dark:bg-black cursor-pointer
       "
     >
@@ -99,7 +99,7 @@ export default function ProductCard({
 
       <div className="flex gap-2 mt-4">
         <button
-          onClick={handleAddToCart}  // 👈 AQUI
+          onClick={handleAddToCart}
           className="
             flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg cursor-pointer
             bg-indigo-600 text-white font-semibold 
