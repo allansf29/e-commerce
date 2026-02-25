@@ -13,7 +13,6 @@ const Footer = () => {
   return (
     <footer className="relative bg-gray-100 dark:bg-[#0b0b0d] text-gray-800 dark:text-gray-200 mt-20 overflow-hidden">
 
-      {/* FUNDO SUAVE */}
       <motion.div
         className="absolute inset-0 -z-10 bg-gradient-to-t from-primary/5 to-transparent opacity-70"
         initial={{ opacity: 0 }}
@@ -21,10 +20,8 @@ const Footer = () => {
         transition={{ duration: 1.2 }}
       />
 
-      {/* CONTEÚDO */}
       <div className="container mx-auto px-6 lg:px-8 py-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
 
-        {/* LOGO */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -41,7 +38,6 @@ const Footer = () => {
           </p>
         </motion.div>
 
-        {/* LINKS */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -69,7 +65,6 @@ const Footer = () => {
           </ul>
         </motion.div>
 
-        {/* AJUDA */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -98,7 +93,6 @@ const Footer = () => {
           </ul>
         </motion.div>
 
-        {/* NEWSLETTER */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -127,7 +121,6 @@ const Footer = () => {
             </button>
           </form>
 
-          {/* REDES */}
           <div className="flex items-center gap-4 mt-5">
             {[Facebook, Instagram, Twitter, Mail].map((Icon, i) => (
               <motion.a
@@ -148,7 +141,63 @@ const Footer = () => {
         </motion.div>
       </div>
 
-      {/* LINHA FINAL */}
+      <section className="container mx-auto px-6 lg:px-8 pb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm text-gray-600 dark:text-gray-300 border-t border-gray-200 dark:border-gray-800 pt-8"
+        >
+
+          <motion.div
+            whileHover={{ y: -4, scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="flex flex-col cursor-default"
+          >
+            <span className="font-semibold text-primary dark:text-white">
+              Frete para todo Brasil
+            </span>
+            <span>Entrega rápida e rastreada</span>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ y: -4, scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="flex flex-col cursor-default"
+          >
+            <span className="font-semibold text-primary dark:text-white">
+              7 dias para troca
+            </span>
+            <span>Após o recebimento</span>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ y: -4, scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="flex flex-col cursor-default"
+          >
+            <span className="font-semibold text-primary dark:text-white">
+              Pagamento seguro
+            </span>
+            <span>Proteção de dados
+            </span>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ y: -4, scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="flex flex-col cursor-default"
+          >
+            <span className="font-semibold text-primary dark:text-white">
+              Suporte rápido
+            </span>
+            <span>Atendimento facilitado</span>
+          </motion.div>
+
+        </motion.div>
+      </section>
+
       <motion.div
         variants={fadeUp}
         initial="hidden"

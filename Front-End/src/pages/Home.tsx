@@ -88,7 +88,7 @@ const Home: FC = () => {
 
       <section className="container mx-auto px-6 lg:px-8 pt-16 pb-20 relative overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          
+
           <motion.div
             className="lg:col-span-6"
             initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
@@ -183,7 +183,10 @@ const Home: FC = () => {
             1024: { slidesPerView: 4 },
           }}
           navigation
-          pagination={{ clickable: true }}
+          pagination={{
+            clickable: true,
+            el: ".custom-pagination",
+          }}
           autoplay={{ delay: 3500, disableOnInteraction: false }}
           className="pb-10"
         >
@@ -210,7 +213,10 @@ const Home: FC = () => {
                 <div className="p-5">
                   <h3 className="text-base font-medium line-clamp-1">{p.name}</h3>
                   <p className="mt-2 text-lg font-semibold text-primary dark:text-text-dark">
-                    {Number(p.price).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
+                    {Number(p.price).toLocaleString("pt-BR", {
+                      style: "currency",
+                      currency: "BRL",
+                    })}
                   </p>
 
                   <div className="mt-5 flex items-center gap-3">
@@ -233,6 +239,8 @@ const Home: FC = () => {
             </SwiperSlide>
           ))}
         </Swiper>
+
+        <div className="custom-pagination mt-6 flex justify-center"></div>
       </section>
     </main>
   );
